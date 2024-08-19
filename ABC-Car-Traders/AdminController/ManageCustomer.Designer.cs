@@ -60,7 +60,7 @@
             // 
             // txtCustomerContact
             // 
-            this.txtCustomerContact.Location = new System.Drawing.Point(107, 234);
+            this.txtCustomerContact.Location = new System.Drawing.Point(111, 234);
             this.txtCustomerContact.Name = "txtCustomerContact";
             this.txtCustomerContact.Size = new System.Drawing.Size(371, 22);
             this.txtCustomerContact.TabIndex = 1;
@@ -74,7 +74,7 @@
             // 
             // txtCustomerName
             // 
-            this.txtCustomerName.Location = new System.Drawing.Point(107, 183);
+            this.txtCustomerName.Location = new System.Drawing.Point(111, 183);
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.Size = new System.Drawing.Size(371, 22);
             this.txtCustomerName.TabIndex = 3;

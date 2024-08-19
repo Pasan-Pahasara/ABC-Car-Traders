@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.adminContainer = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnManageCustomer = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.adminContainer = new System.Windows.Forms.Panel();
+            this.btnManageVehicle = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnManageVehicle);
             this.panel1.Controls.Add(this.btnManageCustomer);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -47,24 +49,15 @@
             this.panel1.Size = new System.Drawing.Size(237, 762);
             this.panel1.TabIndex = 0;
             // 
-            // adminContainer
+            // btnManageCustomer
             // 
-            this.adminContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.adminContainer.Location = new System.Drawing.Point(237, 0);
-            this.adminContainer.Name = "adminContainer";
-            this.adminContainer.Padding = new System.Windows.Forms.Padding(0, 25, 25, 25);
-            this.adminContainer.Size = new System.Drawing.Size(1041, 762);
-            this.adminContainer.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(186, 26);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ABC Car Traders";
+            this.btnManageCustomer.Location = new System.Drawing.Point(27, 140);
+            this.btnManageCustomer.Name = "btnManageCustomer";
+            this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
+            this.btnManageCustomer.TabIndex = 2;
+            this.btnManageCustomer.Text = "Manage Customer";
+            this.btnManageCustomer.UseVisualStyleBackColor = true;
+            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
             // 
             // label2
             // 
@@ -76,15 +69,34 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Welcome";
             // 
-            // btnManageCustomer
+            // label1
             // 
-            this.btnManageCustomer.Location = new System.Drawing.Point(27, 140);
-            this.btnManageCustomer.Name = "btnManageCustomer";
-            this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
-            this.btnManageCustomer.TabIndex = 2;
-            this.btnManageCustomer.Text = "Manage Customer";
-            this.btnManageCustomer.UseVisualStyleBackColor = true;
-            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 26);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "ABC Car Traders";
+            // 
+            // adminContainer
+            // 
+            this.adminContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.adminContainer.Location = new System.Drawing.Point(237, 0);
+            this.adminContainer.Name = "adminContainer";
+            this.adminContainer.Padding = new System.Windows.Forms.Padding(0, 25, 25, 25);
+            this.adminContainer.Size = new System.Drawing.Size(1041, 762);
+            this.adminContainer.TabIndex = 1;
+            // 
+            // btnManageVehicle
+            // 
+            this.btnManageVehicle.Location = new System.Drawing.Point(27, 203);
+            this.btnManageVehicle.Name = "btnManageVehicle";
+            this.btnManageVehicle.Size = new System.Drawing.Size(184, 48);
+            this.btnManageVehicle.TabIndex = 3;
+            this.btnManageVehicle.Text = "Manage Vehicle";
+            this.btnManageVehicle.UseVisualStyleBackColor = true;
+            this.btnManageVehicle.Click += new System.EventHandler(this.btnManageVehicle_Click);
             // 
             // AdminDashboard
             // 
@@ -110,6 +122,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnManageCustomer;
+        private System.Windows.Forms.Button btnManageVehicle;
     }
 }
 
