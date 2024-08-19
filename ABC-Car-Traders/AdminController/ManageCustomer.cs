@@ -36,11 +36,11 @@ namespace ABC_Car_Traders.AdminController
                             // SQL adapter 
                             SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
                             // Datatable
-                            DataTable vehicleTable = new DataTable();
+                            DataTable customerTable = new DataTable();
                             // Fill the datatable by executing the command
-                            sqlAdapter.Fill(vehicleTable);
+                            sqlAdapter.Fill(customerTable);
                             // set the datagrid view's datasource 
-                            dgvCustomer.DataSource = vehicleTable;
+                            dgvCustomer.DataSource = customerTable;
                         }
                         catch (SqlException sqlEx)
                         {
@@ -140,7 +140,7 @@ namespace ABC_Car_Traders.AdminController
                 txtCustomerName.Text = row.Cells[1].Value.ToString();
                 txtCustomerAddress.Text = row.Cells[2].Value.ToString();
                 txtCustomerContact.Text = row.Cells[3].Value.ToString();
-                txtCustomerNIC.Text = row.Cells[3].Value.ToString();
+                txtCustomerNIC.Text = row.Cells[4].Value.ToString();
             }
         }
 

@@ -164,9 +164,9 @@
             // 
             // btnCustomerUpdate
             // 
-            this.btnCustomerUpdate.Location = new System.Drawing.Point(723, 283);
+            this.btnCustomerUpdate.Location = new System.Drawing.Point(701, 283);
             this.btnCustomerUpdate.Name = "btnCustomerUpdate";
-            this.btnCustomerUpdate.Size = new System.Drawing.Size(120, 46);
+            this.btnCustomerUpdate.Size = new System.Drawing.Size(132, 46);
             this.btnCustomerUpdate.TabIndex = 14;
             this.btnCustomerUpdate.Text = "Update Customer";
             this.btnCustomerUpdate.UseVisualStyleBackColor = true;
@@ -174,9 +174,9 @@
             // 
             // btnCustomerDelete
             // 
-            this.btnCustomerDelete.Location = new System.Drawing.Point(858, 283);
+            this.btnCustomerDelete.Location = new System.Drawing.Point(849, 283);
             this.btnCustomerDelete.Name = "btnCustomerDelete";
-            this.btnCustomerDelete.Size = new System.Drawing.Size(120, 46);
+            this.btnCustomerDelete.Size = new System.Drawing.Size(129, 46);
             this.btnCustomerDelete.TabIndex = 15;
             this.btnCustomerDelete.Text = "Delete Customer";
             this.btnCustomerDelete.UseVisualStyleBackColor = true;
@@ -196,7 +196,7 @@
             // 
             // btnCustomerAdd
             // 
-            this.btnCustomerAdd.Location = new System.Drawing.Point(585, 283);
+            this.btnCustomerAdd.Location = new System.Drawing.Point(565, 283);
             this.btnCustomerAdd.Name = "btnCustomerAdd";
             this.btnCustomerAdd.Size = new System.Drawing.Size(120, 46);
             this.btnCustomerAdd.TabIndex = 17;
