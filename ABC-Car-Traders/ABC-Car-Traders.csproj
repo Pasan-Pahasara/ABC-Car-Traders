@@ -52,11 +52,11 @@
     <Compile Include="AdminController\ManageCustomer.Designer.cs">
       <DependentUpon>ManageCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminController\ManageVehicle.cs">
+    <Compile Include="AdminController\ManageCar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AdminController\ManageVehicle.Designer.cs">
-      <DependentUpon>ManageVehicle.cs</DependentUpon>
+    <Compile Include="AdminController\ManageCar.Designer.cs">
+      <DependentUpon>ManageCar.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard.cs">
       <SubType>Form</SubType>
@@ -69,8 +69,8 @@
     <EmbeddedResource Include="AdminController\ManageCustomer.resx">
       <DependentUpon>ManageCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminController\ManageVehicle.resx">
-      <DependentUpon>ManageVehicle.cs</DependentUpon>
+    <EmbeddedResource Include="AdminController\ManageCar.resx">
+      <DependentUpon>ManageCar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>

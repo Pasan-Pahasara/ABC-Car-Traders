@@ -32,10 +32,10 @@ namespace ABC_Car_Traders
             AddAdminControl(manageCustomer);
         }
 
-        private void btnManageVehicle_Click(object sender, EventArgs e)
+        private void btnManageCar_Click(object sender, EventArgs e)
         {
-            ManageVehicle manageVehicle = new ManageVehicle();
-            AddAdminControl(manageVehicle);
+            ManageCar manageCar = new ManageCar();
+            AddAdminControl(manageCar);
         }
     }
 }

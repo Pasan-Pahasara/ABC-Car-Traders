@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace ABC_Car_Traders.AdminController
 {
-    public partial class ManageVehicle : UserControl
+    public partial class ManageCar : UserControl
     {
-        public ManageVehicle()
+        public ManageCar()
         {
             InitializeComponent();
         }
 
-        private void ManageVehicle_Load(object sender, EventArgs e)
+        private void ManageCar_Load(object sender, EventArgs e)
         {
             try
             {
@@ -35,11 +35,11 @@ namespace ABC_Car_Traders.AdminController
                             // SQL adapter 
                             SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
                             // Datatable
-                            DataTable vehicleTable = new DataTable();
+                            DataTable carTable = new DataTable();
                             // Fill the datatable by executing the command
-                            sqlAdapter.Fill(vehicleTable);
+                            sqlAdapter.Fill(carTable);
                             // set the datagrid view's datasource 
-                            dgvVehicle.DataSource = vehicleTable;
+                            dgvCar.DataSource = carTable;
                         }
                         catch (SqlException sqlEx)
                         {
@@ -58,12 +58,12 @@ namespace ABC_Car_Traders.AdminController
             }
         }
 
-        private void btnVehicleUpdate_Click(object sender, EventArgs e)
+        private void btnCarUpdate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtVehicleModel.Text) ||
-              string.IsNullOrWhiteSpace(txtVehicleBrand.Text) ||
-              string.IsNullOrWhiteSpace(txtVehicleFuelType.Text) ||
-              string.IsNullOrWhiteSpace(txtVehiclePrice.Text))
+            if (string.IsNullOrWhiteSpace(txtCarModel.Text) ||
+              string.IsNullOrWhiteSpace(txtCarBrand.Text) ||
+              string.IsNullOrWhiteSpace(txtCarFuelType.Text) ||
+              string.IsNullOrWhiteSpace(txtCarPrice.Text))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -79,19 +79,19 @@ namespace ABC_Car_Traders.AdminController
                     {
                         // Set Parameters of the sql Command text
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtVehicleId.Text;
+                        sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Model", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@Model"].Value = txtVehicleModel.Text;
+                        sqlCommand.Parameters["@Model"].Value = txtCarModel.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Brand", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@Brand"].Value = txtVehicleBrand.Text;
+                        sqlCommand.Parameters["@Brand"].Value = txtCarBrand.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@FuelType", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@FuelType"].Value = txtVehicleFuelType.Text;
+                        sqlCommand.Parameters["@FuelType"].Value = txtCarFuelType.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Price", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@Price"].Value = txtVehiclePrice.Text;
+                        sqlCommand.Parameters["@Price"].Value = txtCarPrice.Text;
 
                         try
                         {
@@ -102,8 +102,8 @@ namespace ABC_Car_Traders.AdminController
                             int result = sqlCommand.ExecuteNonQuery();
                             if (result > 0)
                             {
-                                MessageBox.Show("Vehicle updated successfully.");
-                                ClearVehicleFields();
+                                MessageBox.Show("Car updated successfully.");
+                                ClearCarFields();
                             }
 
                         }
@@ -113,7 +113,7 @@ namespace ABC_Car_Traders.AdminController
                         }
                         finally
                         {
-                            ManageVehicle_Load(sender, e);
+                            ManageCar_Load(sender, e);
                             dbConnection.Close();
                         }
 
@@ -126,33 +126,33 @@ namespace ABC_Car_Traders.AdminController
             }
         }
 
-        private void dgvVehicle_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCar_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Ensure the user clicks on a cell that is not a header
             if (e.RowIndex >= 0)
             {
                 // Get the current row
-                DataGridViewRow row = dgvVehicle.Rows[e.RowIndex];
+                DataGridViewRow row = dgvCar.Rows[e.RowIndex];
 
                 // Assign the cell values to the text fields
-                txtVehicleId.Text = row.Cells[0].Value.ToString();
-                txtVehicleModel.Text = row.Cells[1].Value.ToString();
-                txtVehicleBrand.Text = row.Cells[2].Value.ToString();
-                txtVehicleFuelType.Text = row.Cells[3].Value.ToString();
-                txtVehiclePrice.Text = row.Cells[4].Value.ToString();
+                txtCarId.Text = row.Cells[0].Value.ToString();
+                txtCarModel.Text = row.Cells[1].Value.ToString();
+                txtCarBrand.Text = row.Cells[2].Value.ToString();
+                txtCarFuelType.Text = row.Cells[3].Value.ToString();
+                txtCarPrice.Text = row.Cells[4].Value.ToString();
             }
         }
 
-        private void ClearVehicleFields()
+        private void ClearCarFields()
         {
-            txtVehicleId.Text = string.Empty;
-            txtVehicleModel.Text = string.Empty;
-            txtVehicleBrand.Text = string.Empty;
-            txtVehicleFuelType.Text = string.Empty;
-            txtVehiclePrice.Text = string.Empty;
+            txtCarId.Text = string.Empty;
+            txtCarModel.Text = string.Empty;
+            txtCarBrand.Text = string.Empty;
+            txtCarFuelType.Text = string.Empty;
+            txtCarPrice.Text = string.Empty;
         }
 
-        private void btnVehicleDelete_Click(object sender, EventArgs e)
+        private void btnCarDelete_Click(object sender, EventArgs e)
         {
             using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
             {
@@ -160,7 +160,7 @@ namespace ABC_Car_Traders.AdminController
                 using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                 {
                     sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@ID"].Value = txtVehicleId.Text;
+                    sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
 
                     try
                     {
@@ -171,8 +171,8 @@ namespace ABC_Car_Traders.AdminController
                         int result = sqlCommand.ExecuteNonQuery();
                         if (result > 0)
                         {
-                            MessageBox.Show("Vehicle deleted successfully.");
-                            ClearVehicleFields();
+                            MessageBox.Show("Car deleted successfully.");
+                            ClearCarFields();
                         }
 
                     }
@@ -182,7 +182,7 @@ namespace ABC_Car_Traders.AdminController
                     }
                     finally
                     {
-                        ManageVehicle_Load(sender, e);
+                        ManageCar_Load(sender, e);
                         dbConnection.Close();
                     }
                 }
@@ -190,12 +190,12 @@ namespace ABC_Car_Traders.AdminController
 
         }
 
-        private void btnVehicleAdd_Click(object sender, EventArgs e)
+        private void btnCarAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtVehicleModel.Text) ||
-             string.IsNullOrWhiteSpace(txtVehicleBrand.Text) ||
-             string.IsNullOrWhiteSpace(txtVehicleFuelType.Text) ||
-             string.IsNullOrWhiteSpace(txtVehiclePrice.Text))
+            if (string.IsNullOrWhiteSpace(txtCarModel.Text) ||
+             string.IsNullOrWhiteSpace(txtCarBrand.Text) ||
+             string.IsNullOrWhiteSpace(txtCarFuelType.Text) ||
+             string.IsNullOrWhiteSpace(txtCarPrice.Text))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -209,19 +209,19 @@ namespace ABC_Car_Traders.AdminController
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtVehicleId.Text;
+                        sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Model", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@Model"].Value = txtVehicleModel.Text;
+                        sqlCommand.Parameters["@Model"].Value = txtCarModel.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Brand", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@Brand"].Value = txtVehicleBrand.Text;
+                        sqlCommand.Parameters["@Brand"].Value = txtCarBrand.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@FuelType", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@FuelType"].Value = txtVehicleFuelType.Text;
+                        sqlCommand.Parameters["@FuelType"].Value = txtCarFuelType.Text;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Price", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@Price"].Value = txtVehiclePrice.Text;
+                        sqlCommand.Parameters["@Price"].Value = txtCarPrice.Text;
 
                         try
                         {
@@ -229,8 +229,8 @@ namespace ABC_Car_Traders.AdminController
                             int result = sqlCommand.ExecuteNonQuery();
                             if (result > 0)
                             {
-                                MessageBox.Show("Vehicle added successfully.");
-                                ClearVehicleFields();
+                                MessageBox.Show("Car added successfully.");
+                                ClearCarFields();
                             }
                         }
                         catch (SqlException sqlEx)
@@ -239,7 +239,7 @@ namespace ABC_Car_Traders.AdminController
                         }
                         finally
                         {
-                            ManageVehicle_Load(sender, e);
+                            ManageCar_Load(sender, e);
                             dbConnection.Close();
                         }
                     }
@@ -251,11 +251,11 @@ namespace ABC_Car_Traders.AdminController
             }
         }
 
-        private void btnVehicleSearch_Click(object sender, EventArgs e)
+        private void btnCarSearch_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtVehicleId.Text))
+            if (string.IsNullOrWhiteSpace(txtCarId.Text))
             {
-                MessageBox.Show("Please enter a Vehicle ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a Car ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -267,7 +267,7 @@ namespace ABC_Car_Traders.AdminController
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtVehicleId.Text;
+                        sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
 
                         dbConnection.Open();
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
@@ -275,15 +275,15 @@ namespace ABC_Car_Traders.AdminController
                             if (reader.Read())
                             {
                                 // Populate the text fields with the data
-                                txtVehicleModel.Text = reader["Model"].ToString();
-                                txtVehicleBrand.Text = reader["Brand"].ToString();
-                                txtVehicleFuelType.Text = reader["FuelType"].ToString();
-                                txtVehiclePrice.Text = reader["Price"].ToString();
+                                txtCarModel.Text = reader["Model"].ToString();
+                                txtCarBrand.Text = reader["Brand"].ToString();
+                                txtCarFuelType.Text = reader["FuelType"].ToString();
+                                txtCarPrice.Text = reader["Price"].ToString();
                             }
                             else
                             {
-                                MessageBox.Show("Vehicle ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                ClearVehicleFields();
+                                MessageBox.Show("Car ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearCarFields();
                             }
                         }
                     }
@@ -291,7 +291,7 @@ namespace ABC_Car_Traders.AdminController
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error searching customer: " + ex.Message);
+                MessageBox.Show("Error searching car: " + ex.Message);
             }
         }
     }
