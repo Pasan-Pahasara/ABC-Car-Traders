@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ABC_Car_Traders.AdminController;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,20 @@ namespace ABC_Car_Traders
         public AdminDashboard()
         {
             InitializeComponent();
+        }
+
+        private void AddAdminControl(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            adminContainer.Controls.Clear();
+            adminContainer.Controls.Add(userControl);
+            userControl.BringToFront();
+        }
+
+        private void btnManageCustomer_Click(object sender, EventArgs e)
+        {
+            ManageCustomer manageCustomer = new ManageCustomer();
+            AddAdminControl(manageCustomer);
         }
     }
 }
