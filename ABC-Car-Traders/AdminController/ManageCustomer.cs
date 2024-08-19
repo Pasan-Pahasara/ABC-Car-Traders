@@ -61,51 +61,69 @@ namespace ABC_Car_Traders.AdminController
 
         private void btnCustomerUpdate_Click(object sender, EventArgs e)
         {
-            using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+            if (string.IsNullOrWhiteSpace(txtCustomerName.Text) ||
+              string.IsNullOrWhiteSpace(txtCustomerAddress.Text) ||
+              string.IsNullOrWhiteSpace(txtCustomerContact.Text) ||
+              string.IsNullOrWhiteSpace(txtCustomerNIC.Text))
             {
-                // UPDATE QUERY
-                // Command Text with parameters                    
-                // string sqlCommandText = "INSERT INTO Book (BookId,ISBN,Title,Author,Genre,PublishedYear) VALUES (@BookId,@ISBN,@Title,@Author,@Genre,@PublishedYear)";
-                string sqlCommandText = "UPDATE Customer SET Name = @Name, Address = @Address, Contact = @Contact, NIC = @NIC WHERE ID = @ID";
-                // Set Parameters of the sql Command text
-                using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
+                    // Command Text with parameters                    
+                    string sqlCommandText = "UPDATE Customer SET Name = @Name, Address = @Address, Contact = @Contact, NIC = @NIC WHERE ID = @ID";
                     // Set Parameters of the sql Command text
-                    sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
-
-                    sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@Name"].Value = txtCustomerName.Text;
-
-                    sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@Address"].Value = txtCustomerAddress.Text;
-
-                    sqlCommand.Parameters.Add(new SqlParameter("@Contact", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@Contact"].Value = txtCustomerContact.Text;
-
-                    sqlCommand.Parameters.Add(new SqlParameter("@NIC", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@NIC"].Value = txtCustomerNIC.Text;
-
-                    try
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
-                        // Open database connection
-                        dbConnection.Open();
+                        // Set Parameters of the sql Command text
+                        sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
 
-                        // Execute the command
-                        int result = sqlCommand.ExecuteNonQuery();
+                        sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Name"].Value = txtCustomerName.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Address"].Value = txtCustomerAddress.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Contact", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Contact"].Value = txtCustomerContact.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@NIC", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@NIC"].Value = txtCustomerNIC.Text;
+
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+
+                            // Execute the command
+                            int result = sqlCommand.ExecuteNonQuery();
+                            if (result > 0)
+                            {
+                                MessageBox.Show("Customer updated successfully.");
+                                ClearCustomerFields();
+                            }
+
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            ManageCustomer_Load(sender, e);
+                            dbConnection.Close();
+                        }
 
                     }
-                    catch (SqlException sqlEx)
-                    {
-                        MessageBox.Show(sqlEx.Message);
-                    }
-                    finally
-                    {
-                        ManageCustomer_Load(sender, e);
-                        dbConnection.Close();
-                    }
-
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -143,6 +161,11 @@ namespace ABC_Car_Traders.AdminController
 
                         // Execute the command
                         int result = sqlCommand.ExecuteNonQuery();
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Customer deleted successfully.");
+                            ClearCustomerFields();
+                        }
 
                     }
                     catch (SqlException sqlEx)
@@ -159,19 +182,33 @@ namespace ABC_Car_Traders.AdminController
 
         }
 
+        private void ClearCustomerFields()
+        {
+            txtCustomerId.Text = string.Empty;
+            txtCustomerName.Text = string.Empty;
+            txtCustomerAddress.Text = string.Empty;
+            txtCustomerContact.Text = string.Empty;
+            txtCustomerNIC.Text = string.Empty;
+        }
+
         private void btnCustomerAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtCustomerName.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerAddress.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerContact.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerNIC.Text))
+            {
+                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
-                // Create the connection object
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    // Command Text with parameters                    
-                    string sqlCommandText = "INSERT INTO Customer (ID,Name,Address,Contact,NIC) VALUES (@ID,@Name,@Address,@Contact,@NIC)";
-
+                    string sqlCommandText = "INSERT INTO Customer (ID, Name, Address, Contact, NIC) VALUES (@ID, @Name, @Address, @Contact, @NIC)";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
-                        // Set Parameters of the sql Command text
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
                         sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
 
@@ -189,12 +226,13 @@ namespace ABC_Car_Traders.AdminController
 
                         try
                         {
-                            // Open database connection
                             dbConnection.Open();
-
-                            // Execute the command
                             int result = sqlCommand.ExecuteNonQuery();
-
+                            if (result > 0)
+                            {
+                                MessageBox.Show("Customer added successfully.");
+                                ClearCustomerFields();
+                            }
                         }
                         catch (SqlException sqlEx)
                         {
@@ -212,7 +250,50 @@ namespace ABC_Car_Traders.AdminController
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        private void btnCustomerSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCustomerId.Text))
+            {
+                MessageBox.Show("Please enter a Customer ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    string sqlCommandText = "SELECT * FROM Customer WHERE ID = @ID";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
+
+                        dbConnection.Open();
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Populate the text fields with the data
+                                txtCustomerName.Text = reader["Name"].ToString();
+                                txtCustomerAddress.Text = reader["Address"].ToString();
+                                txtCustomerContact.Text = reader["Contact"].ToString();
+                                txtCustomerNIC.Text = reader["NIC"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Customer ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearCustomerFields();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error searching customer: " + ex.Message);
+            }
         }
     }
 }

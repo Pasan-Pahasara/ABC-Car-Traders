@@ -40,7 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtCustomerNIC = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnCustomerSearch = new System.Windows.Forms.Button();
             this.btnCustomerUpdate = new System.Windows.Forms.Button();
             this.btnCustomerDelete = new System.Windows.Forms.Button();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
@@ -152,14 +152,15 @@
             this.button1.Text = "Generate Report";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnCustomerSearch
             // 
-            this.button3.Location = new System.Drawing.Point(902, 114);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 27);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Search";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnCustomerSearch.Location = new System.Drawing.Point(902, 114);
+            this.btnCustomerSearch.Name = "btnCustomerSearch";
+            this.btnCustomerSearch.Size = new System.Drawing.Size(75, 27);
+            this.btnCustomerSearch.TabIndex = 13;
+            this.btnCustomerSearch.Text = "Search";
+            this.btnCustomerSearch.UseVisualStyleBackColor = true;
+            this.btnCustomerSearch.Click += new System.EventHandler(this.btnCustomerSearch_Click);
             // 
             // btnCustomerUpdate
             // 
@@ -212,7 +213,7 @@
             this.Controls.Add(this.dgvCustomer);
             this.Controls.Add(this.btnCustomerDelete);
             this.Controls.Add(this.btnCustomerUpdate);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnCustomerSearch);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtCustomerNIC);
             this.Controls.Add(this.label6);
@@ -248,7 +249,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtCustomerNIC;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnCustomerSearch;
         private System.Windows.Forms.Button btnCustomerUpdate;
         private System.Windows.Forms.Button btnCustomerDelete;
         private System.Windows.Forms.DataGridView dgvCustomer;
