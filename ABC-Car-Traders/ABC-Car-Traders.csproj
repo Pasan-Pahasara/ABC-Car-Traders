@@ -76,6 +76,18 @@
     <Compile Include="AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerController\OrderCar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomerController\OrderCar.Designer.cs">
+      <DependentUpon>OrderCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerController\OrderCarPart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomerController\OrderCarPart.Designer.cs">
+      <DependentUpon>OrderCarPart.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +117,12 @@
     <EmbeddedResource Include="AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomerController\OrderCar.resx">
+      <DependentUpon>OrderCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerController\OrderCarPart.resx">
+      <DependentUpon>OrderCarPart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerDashboard.resx">
       <DependentUpon>CustomerDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,8 +148,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomerController\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -88,6 +88,7 @@
             this.btnOrderCarPart.TabIndex = 3;
             this.btnOrderCarPart.Text = "Order Car Parts";
             this.btnOrderCarPart.UseVisualStyleBackColor = true;
+            this.btnOrderCarPart.Click += new System.EventHandler(this.btnOrderCarPart_Click);
             // 
             // btnOrderCar
             // 
@@ -97,12 +98,14 @@
             this.btnOrderCar.TabIndex = 2;
             this.btnOrderCar.Text = "Order Cars";
             this.btnOrderCar.UseVisualStyleBackColor = true;
+            this.btnOrderCar.Click += new System.EventHandler(this.btnOrderCar_Click);
             // 
             // customerContainer
             // 
             this.customerContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customerContainer.Location = new System.Drawing.Point(237, 0);
             this.customerContainer.Name = "customerContainer";
+            this.customerContainer.Padding = new System.Windows.Forms.Padding(0, 25, 25, 25);
             this.customerContainer.Size = new System.Drawing.Size(1041, 762);
             this.customerContainer.TabIndex = 2;
             // 
