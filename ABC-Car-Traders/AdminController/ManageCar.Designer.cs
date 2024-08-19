@@ -45,6 +45,8 @@
             this.txtCarModel = new System.Windows.Forms.TextBox();
             this.txtCarId = new System.Windows.Forms.TextBox();
             this.txtCarFuelType = new System.Windows.Forms.TextBox();
+            this.txtCarQty = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,7 +123,7 @@
             // 
             // txtCarPrice
             // 
-            this.txtCarPrice.Location = new System.Drawing.Point(607, 234);
+            this.txtCarPrice.Location = new System.Drawing.Point(111, 290);
             this.txtCarPrice.Name = "txtCarPrice";
             this.txtCarPrice.Size = new System.Drawing.Size(371, 22);
             this.txtCarPrice.TabIndex = 27;
@@ -130,7 +132,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(525, 236);
+            this.label6.Location = new System.Drawing.Point(36, 290);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 20);
             this.label6.TabIndex = 26;
@@ -170,7 +172,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(570, 118);
+            this.label2.Location = new System.Drawing.Point(603, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 20);
             this.label2.TabIndex = 22;
@@ -204,11 +206,30 @@
             this.txtCarFuelType.Size = new System.Drawing.Size(371, 22);
             this.txtCarFuelType.TabIndex = 18;
             // 
+            // txtCarQty
+            // 
+            this.txtCarQty.Location = new System.Drawing.Point(607, 234);
+            this.txtCarQty.Name = "txtCarQty";
+            this.txtCarQty.Size = new System.Drawing.Size(370, 22);
+            this.txtCarQty.TabIndex = 35;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(525, 234);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 20);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Qty";
+            // 
             // ManageCar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.txtCarQty);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnCarAdd);
             this.Controls.Add(this.dgvCar);
             this.Controls.Add(this.btnCarDelete);
@@ -254,5 +275,7 @@
         private System.Windows.Forms.TextBox txtCarModel;
         private System.Windows.Forms.TextBox txtCarId;
         private System.Windows.Forms.TextBox txtCarFuelType;
+        private System.Windows.Forms.TextBox txtCarQty;
+        private System.Windows.Forms.Label label7;
     }
 }

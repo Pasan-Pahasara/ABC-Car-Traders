@@ -25,7 +25,7 @@ namespace ABC_Car_Traders.AdminController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text with to select * data from the database table
-                    string sqlCommandText = "SELECT * FROM Vehicle";
+                    string sqlCommandText = "SELECT * FROM Car";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         try
@@ -73,7 +73,7 @@ namespace ABC_Car_Traders.AdminController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text with parameters                    
-                    string sqlCommandText = "UPDATE Vehicle SET Model = @Model, Brand = @Brand, FuelType = @FuelType, Price = @Price WHERE ID = @ID";
+                    string sqlCommandText = "UPDATE Car SET Model = @Model, Brand = @Brand, FuelType = @FuelType, Qty = @Qty, Price = @Price WHERE ID = @ID";
                     // Set Parameters of the sql Command text
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
@@ -90,7 +90,10 @@ namespace ABC_Car_Traders.AdminController
                         sqlCommand.Parameters.Add(new SqlParameter("@FuelType", SqlDbType.VarChar));
                         sqlCommand.Parameters["@FuelType"].Value = txtCarFuelType.Text;
 
-                        sqlCommand.Parameters.Add(new SqlParameter("@Price", SqlDbType.VarChar));
+                        sqlCommand.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
+                        sqlCommand.Parameters["@Qty"].Value = txtCarQty.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
                         sqlCommand.Parameters["@Price"].Value = txtCarPrice.Text;
 
                         try
@@ -139,7 +142,8 @@ namespace ABC_Car_Traders.AdminController
                 txtCarModel.Text = row.Cells[1].Value.ToString();
                 txtCarBrand.Text = row.Cells[2].Value.ToString();
                 txtCarFuelType.Text = row.Cells[3].Value.ToString();
-                txtCarPrice.Text = row.Cells[4].Value.ToString();
+                txtCarQty.Text = row.Cells[4].Value.ToString();
+                txtCarPrice.Text = row.Cells[5].Value.ToString();
             }
         }
 
@@ -149,6 +153,7 @@ namespace ABC_Car_Traders.AdminController
             txtCarModel.Text = string.Empty;
             txtCarBrand.Text = string.Empty;
             txtCarFuelType.Text = string.Empty;
+            txtCarQty.Text = string.Empty;
             txtCarPrice.Text = string.Empty;
         }
 
@@ -156,7 +161,7 @@ namespace ABC_Car_Traders.AdminController
         {
             using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
             {
-                string sqlCommandText = "DELETE FROM Vehicle WHERE ID=@ID";
+                string sqlCommandText = "DELETE FROM Car WHERE ID=@ID";
                 using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                 {
                     sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
@@ -205,7 +210,7 @@ namespace ABC_Car_Traders.AdminController
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    string sqlCommandText = "INSERT INTO Vehicle (ID, Model, Brand, FuelType, Price) VALUES (@ID, @Model, @Brand, @FuelType, @Price)";
+                    string sqlCommandText = "INSERT INTO Car (ID, Model, Brand, FuelType, Qty, Price) VALUES (@ID, @Model, @Brand, @FuelType, @Qty, @Price)";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
@@ -220,7 +225,10 @@ namespace ABC_Car_Traders.AdminController
                         sqlCommand.Parameters.Add(new SqlParameter("@FuelType", SqlDbType.VarChar));
                         sqlCommand.Parameters["@FuelType"].Value = txtCarFuelType.Text;
 
-                        sqlCommand.Parameters.Add(new SqlParameter("@Price", SqlDbType.VarChar));
+                        sqlCommand.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
+                        sqlCommand.Parameters["@Qty"].Value = txtCarQty.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
                         sqlCommand.Parameters["@Price"].Value = txtCarPrice.Text;
 
                         try
@@ -263,7 +271,7 @@ namespace ABC_Car_Traders.AdminController
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    string sqlCommandText = "SELECT * FROM Vehicle WHERE ID = @ID";
+                    string sqlCommandText = "SELECT * FROM Car WHERE ID = @ID";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
@@ -278,6 +286,7 @@ namespace ABC_Car_Traders.AdminController
                                 txtCarModel.Text = reader["Model"].ToString();
                                 txtCarBrand.Text = reader["Brand"].ToString();
                                 txtCarFuelType.Text = reader["FuelType"].ToString();
+                                txtCarQty.Text = reader["Qty"].ToString();
                                 txtCarPrice.Text = reader["Price"].ToString();
                             }
                             else
