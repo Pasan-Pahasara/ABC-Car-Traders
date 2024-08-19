@@ -43,5 +43,11 @@ namespace ABC_Car_Traders
             ManageCarPartPart manageCarPart = new ManageCarPartPart();
             AddAdminControl(manageCarPart);
         }
+
+        private void btnManageOrderDetails_Click(object sender, EventArgs e)
+        {
+            ManageOrderDetails manageOrderDetails = new ManageOrderDetails();
+            AddAdminControl(manageOrderDetails);
+        }
     }
 }

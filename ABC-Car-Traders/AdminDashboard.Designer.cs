@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnManageOrderDetails = new System.Windows.Forms.Button();
             this.btnManageCarPart = new System.Windows.Forms.Button();
             this.btnManageCar = new System.Windows.Forms.Button();
             this.btnManageCustomer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.adminContainer = new System.Windows.Forms.Panel();
-            this.btnManageOrderDetails = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +52,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(237, 762);
             this.panel1.TabIndex = 0;
+            // 
+            // btnManageOrderDetails
+            // 
+            this.btnManageOrderDetails.Location = new System.Drawing.Point(27, 331);
+            this.btnManageOrderDetails.Name = "btnManageOrderDetails";
+            this.btnManageOrderDetails.Size = new System.Drawing.Size(184, 48);
+            this.btnManageOrderDetails.TabIndex = 5;
+            this.btnManageOrderDetails.Text = "Manage Order Details";
+            this.btnManageOrderDetails.UseVisualStyleBackColor = true;
+            this.btnManageOrderDetails.Click += new System.EventHandler(this.btnManageOrderDetails_Click);
             // 
             // btnManageCarPart
             // 
@@ -111,15 +121,6 @@
             this.adminContainer.Padding = new System.Windows.Forms.Padding(0, 25, 25, 25);
             this.adminContainer.Size = new System.Drawing.Size(1041, 762);
             this.adminContainer.TabIndex = 1;
-            // 
-            // btnManageOrderDetails
-            // 
-            this.btnManageOrderDetails.Location = new System.Drawing.Point(27, 331);
-            this.btnManageOrderDetails.Name = "btnManageOrderDetails";
-            this.btnManageOrderDetails.Size = new System.Drawing.Size(184, 48);
-            this.btnManageOrderDetails.TabIndex = 5;
-            this.btnManageOrderDetails.Text = "Manage Order Details";
-            this.btnManageOrderDetails.UseVisualStyleBackColor = true;
             // 
             // AdminDashboard
             // 
