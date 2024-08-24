@@ -44,6 +44,8 @@
             this.txtCarPartStatus = new System.Windows.Forms.TextBox();
             this.txtCarPartOrderId = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnCarOrderUpdateStatus = new System.Windows.Forms.Button();
+            this.btnCarPartOrderUpdateStatus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarPartOrderDetail)).BeginInit();
             this.SuspendLayout();
@@ -84,9 +86,9 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(36, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 20);
+            this.label3.Size = new System.Drawing.Size(94, 20);
             this.label3.TabIndex = 54;
-            this.label3.Text = "Status";
+            this.label3.Text = "Order Status";
             // 
             // label2
             // 
@@ -100,9 +102,9 @@
             // 
             // txtCarStatus
             // 
-            this.txtCarStatus.Location = new System.Drawing.Point(111, 90);
+            this.txtCarStatus.Location = new System.Drawing.Point(140, 90);
             this.txtCarStatus.Name = "txtCarStatus";
-            this.txtCarStatus.Size = new System.Drawing.Size(371, 22);
+            this.txtCarStatus.Size = new System.Drawing.Size(214, 22);
             this.txtCarStatus.TabIndex = 52;
             // 
             // txtCarOrderId
@@ -158,9 +160,9 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(36, 442);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 20);
+            this.label4.Size = new System.Drawing.Size(94, 20);
             this.label4.TabIndex = 62;
-            this.label4.Text = "Status";
+            this.label4.Text = "Order Status";
             // 
             // label5
             // 
@@ -174,9 +176,9 @@
             // 
             // txtCarPartStatus
             // 
-            this.txtCarPartStatus.Location = new System.Drawing.Point(111, 440);
+            this.txtCarPartStatus.Location = new System.Drawing.Point(140, 441);
             this.txtCarPartStatus.Name = "txtCarPartStatus";
-            this.txtCarPartStatus.Size = new System.Drawing.Size(371, 22);
+            this.txtCarPartStatus.Size = new System.Drawing.Size(214, 22);
             this.txtCarPartStatus.TabIndex = 60;
             // 
             // txtCarPartOrderId
@@ -196,11 +198,33 @@
             this.label6.TabIndex = 58;
             this.label6.Text = "Admin / Manage Car Part Order Details";
             // 
+            // btnCarOrderUpdateStatus
+            // 
+            this.btnCarOrderUpdateStatus.Location = new System.Drawing.Point(370, 88);
+            this.btnCarOrderUpdateStatus.Name = "btnCarOrderUpdateStatus";
+            this.btnCarOrderUpdateStatus.Size = new System.Drawing.Size(112, 27);
+            this.btnCarOrderUpdateStatus.TabIndex = 66;
+            this.btnCarOrderUpdateStatus.Text = "Update Status";
+            this.btnCarOrderUpdateStatus.UseVisualStyleBackColor = true;
+            this.btnCarOrderUpdateStatus.Click += new System.EventHandler(this.btnCarOrderUpdateStatus_Click);
+            // 
+            // btnCarPartOrderUpdateStatus
+            // 
+            this.btnCarPartOrderUpdateStatus.Location = new System.Drawing.Point(370, 438);
+            this.btnCarPartOrderUpdateStatus.Name = "btnCarPartOrderUpdateStatus";
+            this.btnCarPartOrderUpdateStatus.Size = new System.Drawing.Size(112, 27);
+            this.btnCarPartOrderUpdateStatus.TabIndex = 67;
+            this.btnCarPartOrderUpdateStatus.Text = "Update Status";
+            this.btnCarPartOrderUpdateStatus.UseVisualStyleBackColor = true;
+            this.btnCarPartOrderUpdateStatus.Click += new System.EventHandler(this.btnCarPartOrderUpdateStatus_Click);
+            // 
             // ManageOrderDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnCarPartOrderUpdateStatus);
+            this.Controls.Add(this.btnCarOrderUpdateStatus);
             this.Controls.Add(this.dgvCarPartOrderDetail);
             this.Controls.Add(this.btnCarOrderPartSearch);
             this.Controls.Add(this.button3);
@@ -245,5 +269,7 @@
         private System.Windows.Forms.TextBox txtCarPartStatus;
         private System.Windows.Forms.TextBox txtCarPartOrderId;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnCarOrderUpdateStatus;
+        private System.Windows.Forms.Button btnCarPartOrderUpdateStatus;
     }
 }

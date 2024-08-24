@@ -126,7 +126,7 @@ namespace ABC_Car_Traders.AdminController
             if (e.RowIndex >= 0)
             {
                 // Get the current row
-                DataGridViewRow row = dgvCarOrderDetail.Rows[e.RowIndex];
+                DataGridViewRow row = dgvCarPartOrderDetail.Rows[e.RowIndex];
 
                 // Assign the cell values to the text fields
                 txtCarPartOrderId.Text = row.Cells[0].Value.ToString();
@@ -227,5 +227,131 @@ namespace ABC_Car_Traders.AdminController
                 MessageBox.Show("Error searching car part order: " + ex.Message);
             }
         }
+
+        private void btnCarOrderUpdateStatus_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCarOrderId.Text) ||
+             string.IsNullOrWhiteSpace(txtCarStatus.Text))
+            {
+                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    // Command Text with parameters                    
+                    string sqlCommandText1 = "UPDATE CarOrder SET OrderStatus = @OrderStatus WHERE OrderId = @OrderId";
+                    string sqlCommandText2 = "UPDATE CarOrderDetails SET OrderStatus = @OrderStatus WHERE OrderId = @OrderId";
+                    // Set Parameters of the sql Command text
+                    using (SqlCommand sqlCommand1 = new SqlCommand(sqlCommandText1, dbConnection))
+                    using (SqlCommand sqlCommand2 = new SqlCommand(sqlCommandText2, dbConnection))
+                    {
+                        // Set Parameters of the sql Command text
+                        sqlCommand1.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.VarChar));
+                        sqlCommand1.Parameters["@OrderId"].Value = txtCarOrderId.Text;
+
+                        sqlCommand1.Parameters.Add(new SqlParameter("@OrderStatus", SqlDbType.VarChar));
+                        sqlCommand1.Parameters["@OrderStatus"].Value = txtCarStatus.Text;
+
+                        sqlCommand2.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.VarChar));
+                        sqlCommand2.Parameters["@OrderId"].Value = txtCarOrderId.Text;
+
+                        sqlCommand2.Parameters.Add(new SqlParameter("@OrderStatus", SqlDbType.VarChar));
+                        sqlCommand2.Parameters["@OrderStatus"].Value = txtCarStatus.Text;
+
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+
+                            // Execute the command
+                            int result1 = sqlCommand1.ExecuteNonQuery();
+                            int result2 = sqlCommand2.ExecuteNonQuery();
+                            if (result1 > 0 && result2 > 0)
+                            {
+                                MessageBox.Show("Car order status updated successfully.");
+                                ClearCarOrderFields();
+                            }
+
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            LoadCarOrderData();
+                            dbConnection.Close();
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnCarPartOrderUpdateStatus_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCarPartOrderId.Text) ||
+            string.IsNullOrWhiteSpace(txtCarPartStatus.Text))
+            {
+                MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    // Command Text with parameters  
+                    string sqlCommandText1 = "UPDATE CarPartOrderDetails SET OrderStatus = @OrderStatus WHERE OrderId = @OrderId";
+                    string sqlCommandText2 = "UPDATE CarPartOrder SET OrderStatus = @OrderStatus WHERE OrderId = @OrderId";
+                    // Set Parameters of the sql Command text
+                    using (SqlCommand sqlCommand1 = new SqlCommand(sqlCommandText1, dbConnection))
+                    using (SqlCommand sqlCommand2 = new SqlCommand(sqlCommandText2, dbConnection))
+                    {
+                        // Set Parameters for both commands
+                        sqlCommand1.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.VarChar)).Value = txtCarPartOrderId.Text;
+                        sqlCommand1.Parameters.Add(new SqlParameter("@OrderStatus", SqlDbType.VarChar)).Value = txtCarPartStatus.Text;
+
+                        sqlCommand2.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.VarChar)).Value = txtCarPartOrderId.Text;
+                        sqlCommand2.Parameters.Add(new SqlParameter("@OrderStatus", SqlDbType.VarChar)).Value = txtCarPartStatus.Text;
+
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+
+                            // Execute both commands
+                            int result1 = sqlCommand1.ExecuteNonQuery();
+                            int result2 = sqlCommand2.ExecuteNonQuery();
+
+                            if (result1 > 0 && result2 > 0)
+                            {
+                                MessageBox.Show("Car part order status updated successfully.");
+                                ClearCarPartOrderFields();
+                            }
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            LoadCarPartOrderData();
+                            dbConnection.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 }
