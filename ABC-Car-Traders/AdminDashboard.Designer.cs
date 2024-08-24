@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnManageCustomer = new System.Windows.Forms.Button();
+            this.btnLogOut = new System.Windows.Forms.PictureBox();
             this.btnManageOrderDetails = new System.Windows.Forms.Button();
             this.btnManageCarPart = new System.Windows.Forms.Button();
             this.btnManageCar = new System.Windows.Forms.Button();
@@ -36,16 +38,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.adminContainer = new System.Windows.Forms.Panel();
-            this.btnManageCustomer = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnManageCustomer);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnManageOrderDetails);
             this.panel1.Controls.Add(this.btnManageCarPart);
             this.panel1.Controls.Add(this.btnManageCar);
@@ -57,6 +57,27 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(237, 762);
             this.panel1.TabIndex = 0;
+            // 
+            // btnManageCustomer
+            // 
+            this.btnManageCustomer.Location = new System.Drawing.Point(27, 204);
+            this.btnManageCustomer.Name = "btnManageCustomer";
+            this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
+            this.btnManageCustomer.TabIndex = 7;
+            this.btnManageCustomer.Text = "Manage Customers";
+            this.btnManageCustomer.UseVisualStyleBackColor = true;
+            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Image = global::ABC_Car_Traders.Properties.Resources.logout;
+            this.btnLogOut.Location = new System.Drawing.Point(96, 659);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(34, 37);
+            this.btnLogOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnLogOut.TabIndex = 6;
+            this.btnLogOut.TabStop = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnManageOrderDetails
             // 
@@ -127,26 +148,6 @@
             this.adminContainer.Size = new System.Drawing.Size(1041, 762);
             this.adminContainer.TabIndex = 1;
             // 
-            // btnManageCustomer
-            // 
-            this.btnManageCustomer.Location = new System.Drawing.Point(27, 204);
-            this.btnManageCustomer.Name = "btnManageCustomer";
-            this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
-            this.btnManageCustomer.TabIndex = 7;
-            this.btnManageCustomer.Text = "Manage Customers";
-            this.btnManageCustomer.UseVisualStyleBackColor = true;
-            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ABC_Car_Traders.Properties.Resources.logout;
-            this.pictureBox1.Location = new System.Drawing.Point(96, 659);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(34, 37);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -160,7 +161,7 @@
             this.Text = "AdminDashboard";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,7 +176,7 @@
         private System.Windows.Forms.Button btnManageCar;
         private System.Windows.Forms.Button btnManageCarPart;
         private System.Windows.Forms.Button btnManageOrderDetails;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox btnLogOut;
         private System.Windows.Forms.Button btnManageCustomer;
     }
 }

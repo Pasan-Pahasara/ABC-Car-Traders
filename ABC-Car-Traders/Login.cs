@@ -16,5 +16,12 @@ namespace ABC_Car_Traders
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+          this.Hide();
+          AdminDashboard adminDashboard = new AdminDashboard();
+          adminDashboard.Show();
+        }
     }
 }
