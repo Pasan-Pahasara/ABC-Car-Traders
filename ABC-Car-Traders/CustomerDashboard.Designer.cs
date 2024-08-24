@@ -35,7 +35,9 @@
             this.btnOrderCarPart = new System.Windows.Forms.Button();
             this.btnOrderCar = new System.Windows.Forms.Button();
             this.customerContainer = new System.Windows.Forms.Panel();
+            this.btnLogOut = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -60,6 +62,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnManageOrderDetails);
             this.panel1.Controls.Add(this.btnOrderCarPart);
             this.panel1.Controls.Add(this.btnOrderCar);
@@ -110,6 +113,16 @@
             this.customerContainer.Size = new System.Drawing.Size(1041, 762);
             this.customerContainer.TabIndex = 2;
             // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Image = global::ABC_Car_Traders.Properties.Resources.logout;
+            this.btnLogOut.Location = new System.Drawing.Point(96, 659);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(34, 37);
+            this.btnLogOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnLogOut.TabIndex = 7;
+            this.btnLogOut.TabStop = false;
+            // 
             // CustomerDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -123,6 +136,7 @@
             this.Text = "CustomerDashboard";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -136,5 +150,6 @@
         private System.Windows.Forms.Button btnOrderCarPart;
         private System.Windows.Forms.Button btnOrderCar;
         private System.Windows.Forms.Panel customerContainer;
+        private System.Windows.Forms.PictureBox btnLogOut;
     }
 }

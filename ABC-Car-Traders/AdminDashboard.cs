@@ -60,9 +60,10 @@ namespace ABC_Car_Traders
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Login login = new Login();
+            login.FormClosed += (s, args) => this.Close();
             login.Show();
+            this.Hide();
         }
     }
 }
