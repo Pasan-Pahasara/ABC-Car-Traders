@@ -32,24 +32,24 @@
             this.btnManageOrderDetails = new System.Windows.Forms.Button();
             this.btnManageCarPart = new System.Windows.Forms.Button();
             this.btnManageCar = new System.Windows.Forms.Button();
-            this.btnManageCustomer = new System.Windows.Forms.Button();
+            this.btnDashBoard = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.adminContainer = new System.Windows.Forms.Panel();
+            this.btnManageCustomer = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnDashBoard = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnDashBoard);
+            this.panel1.Controls.Add(this.btnManageCustomer);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnManageOrderDetails);
             this.panel1.Controls.Add(this.btnManageCarPart);
             this.panel1.Controls.Add(this.btnManageCar);
-            this.panel1.Controls.Add(this.btnManageCustomer);
+            this.panel1.Controls.Add(this.btnDashBoard);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -88,15 +88,15 @@
             this.btnManageCar.UseVisualStyleBackColor = true;
             this.btnManageCar.Click += new System.EventHandler(this.btnManageCar_Click);
             // 
-            // btnManageCustomer
+            // btnDashBoard
             // 
-            this.btnManageCustomer.Location = new System.Drawing.Point(27, 203);
-            this.btnManageCustomer.Name = "btnManageCustomer";
-            this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
-            this.btnManageCustomer.TabIndex = 2;
-            this.btnManageCustomer.Text = "Manage Customers";
-            this.btnManageCustomer.UseVisualStyleBackColor = true;
-            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
+            this.btnDashBoard.Location = new System.Drawing.Point(27, 140);
+            this.btnDashBoard.Name = "btnDashBoard";
+            this.btnDashBoard.Size = new System.Drawing.Size(184, 48);
+            this.btnDashBoard.TabIndex = 2;
+            this.btnDashBoard.Text = "DashBoard";
+            this.btnDashBoard.UseVisualStyleBackColor = true;
+            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
             // 
             // label2
             // 
@@ -127,6 +127,16 @@
             this.adminContainer.Size = new System.Drawing.Size(1041, 762);
             this.adminContainer.TabIndex = 1;
             // 
+            // btnManageCustomer
+            // 
+            this.btnManageCustomer.Location = new System.Drawing.Point(27, 204);
+            this.btnManageCustomer.Name = "btnManageCustomer";
+            this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
+            this.btnManageCustomer.TabIndex = 7;
+            this.btnManageCustomer.Text = "Manage Customers";
+            this.btnManageCustomer.UseVisualStyleBackColor = true;
+            this.btnManageCustomer.Click += new System.EventHandler(this.btnManageCustomer_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ABC_Car_Traders.Properties.Resources.logout;
@@ -136,16 +146,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
-            // 
-            // btnDashBoard
-            // 
-            this.btnDashBoard.Location = new System.Drawing.Point(27, 142);
-            this.btnDashBoard.Name = "btnDashBoard";
-            this.btnDashBoard.Size = new System.Drawing.Size(184, 48);
-            this.btnDashBoard.TabIndex = 7;
-            this.btnDashBoard.Text = "DashBoard";
-            this.btnDashBoard.UseVisualStyleBackColor = true;
-            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
             // 
             // AdminDashboard
             // 
@@ -171,12 +171,12 @@
         private System.Windows.Forms.Panel adminContainer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnManageCustomer;
+        private System.Windows.Forms.Button btnDashBoard;
         private System.Windows.Forms.Button btnManageCar;
         private System.Windows.Forms.Button btnManageCarPart;
         private System.Windows.Forms.Button btnManageOrderDetails;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnDashBoard;
+        private System.Windows.Forms.Button btnManageCustomer;
     }
 }
 
