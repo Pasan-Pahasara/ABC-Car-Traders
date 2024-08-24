@@ -144,7 +144,7 @@ namespace ABC_Car_Traders.CustomerController
             }
         }
 
-        private void ClearCarFields()
+        private void ClearCarPartFields()
         {
             txtCarPartId.Text = string.Empty;
             txtCarPartName.Text = string.Empty;
@@ -158,7 +158,7 @@ namespace ABC_Car_Traders.CustomerController
         {
             if (string.IsNullOrWhiteSpace(txtCarPartSearchId.Text))
             {
-                MessageBox.Show("Please enter a Car ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a Car Part ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -186,8 +186,8 @@ namespace ABC_Car_Traders.CustomerController
                             }
                             else
                             {
-                                MessageBox.Show("Car ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                ClearCarFields();
+                                MessageBox.Show("Car Part ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearCarPartFields();
                             }
                         }
                     }
@@ -195,7 +195,7 @@ namespace ABC_Car_Traders.CustomerController
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error searching car: " + ex.Message);
+                MessageBox.Show("Error searching car part: " + ex.Message);
             }
         }
 
@@ -263,7 +263,7 @@ namespace ABC_Car_Traders.CustomerController
                         LoadCarPartOrderData();
 
                         // Clear the fields after successful order
-                        ClearCarFields();
+                        ClearCarPartFields();
                         txtCustomerId.Text = string.Empty;
                         txtOrderId.Text = string.Empty;
                         lblTotal.Text = "0.00";

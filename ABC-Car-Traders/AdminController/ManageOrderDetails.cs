@@ -105,5 +105,127 @@ namespace ABC_Car_Traders.AdminController
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void dgvCarOrderDetail_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ensure the user clicks on a cell that is not a header
+            if (e.RowIndex >= 0)
+            {
+                // Get the current row
+                DataGridViewRow row = dgvCarOrderDetail.Rows[e.RowIndex];
+
+                // Assign the cell values to the text fields
+                txtCarOrderId.Text = row.Cells[0].Value.ToString();
+                txtCarStatus.Text = row.Cells[9].Value.ToString();
+            }
+        }
+
+        private void dgvCarPartOrderDetail_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ensure the user clicks on a cell that is not a header
+            if (e.RowIndex >= 0)
+            {
+                // Get the current row
+                DataGridViewRow row = dgvCarOrderDetail.Rows[e.RowIndex];
+
+                // Assign the cell values to the text fields
+                txtCarPartOrderId.Text = row.Cells[0].Value.ToString();
+                txtCarPartStatus.Text = row.Cells[9].Value.ToString();
+            }
+        }
+
+        private void ClearCarOrderFields()
+        {
+            txtCarOrderId.Text = string.Empty;
+            txtCarStatus.Text = string.Empty;
+        }
+
+        private void btnCarSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCarOrderId.Text))
+            {
+                MessageBox.Show("Please enter a Car Order ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    string sqlCommandText = "SELECT * FROM CarOrderDetails WHERE OrderId = @OrderId";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@OrderId"].Value = txtCarOrderId.Text;
+
+                        dbConnection.Open();
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Populate the text fields with the data
+                                txtCarStatus.Text = reader["OrderStatus"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Car Order ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearCarOrderFields();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error searching car order: " + ex.Message);
+            }
+        }
+
+        private void ClearCarPartOrderFields()
+        {
+            txtCarPartOrderId.Text = string.Empty;
+            txtCarPartStatus.Text = string.Empty;
+        }
+
+        private void btnCarOrderPartSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCarPartOrderId.Text))
+            {
+                MessageBox.Show("Please enter a Car Part Order ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    string sqlCommandText = "SELECT * FROM CarPartOrderDetails WHERE OrderId = @OrderId";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@OrderId"].Value = txtCarPartOrderId.Text;
+
+                        dbConnection.Open();
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Populate the text fields with the data
+                                txtCarPartStatus.Text = reader["OrderStatus"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Car Part Order ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearCarPartOrderFields();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error searching car part order: " + ex.Message);
+            }
+        }
     }
 }
