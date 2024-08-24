@@ -18,12 +18,34 @@ namespace ABC_Car_Traders.CustomerController
             InitializeComponent();
         }
 
+        private void txtCarPartPrice_TextChanged(object sender, EventArgs e)
+        {
+            CalculateAndSetTotal();
+        }
+
+        private void txtCarPartQty_TextChanged(object sender, EventArgs e)
+        {
+            CalculateAndSetTotal();
+        }
+
+        private void CalculateAndSetTotal()
+        {
+            if (decimal.TryParse(txtCarPartPrice.Text, out decimal carPrice) && int.TryParse(txtCarPartQty.Text, out int carQty))
+            {
+                decimal total = carPrice * carQty;
+                lblTotal.Text = total.ToString();
+            }
+            else
+            {
+                lblTotal.Text = "0.00";
+            }
+        }
+
         private void OrderCarPart_Load(object sender, EventArgs e)
         {
             LoadCarPartData();
             LoadCarPartOrderData();
         }
-
 
         private void LoadCarPartData()
         {
@@ -209,7 +231,7 @@ namespace ABC_Car_Traders.CustomerController
                             sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarPartQty.Text));
                             sqlOrderCommand.Parameters.AddWithValue("@OrderDate", DateTime.Now);
                             sqlOrderCommand.Parameters.AddWithValue("@OrderStatus", "Pending"); // Or any status you want to set
-                            sqlOrderCommand.Parameters.AddWithValue("@Total", decimal.Parse(txtCarPartPrice.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@Total", decimal.Parse(lblTotal.Text));
 
                             sqlOrderCommand.ExecuteNonQuery();
                         }
@@ -244,7 +266,7 @@ namespace ABC_Car_Traders.CustomerController
                         ClearCarFields();
                         txtCustomerId.Text = string.Empty;
                         txtOrderId.Text = string.Empty;
-                        lblTotal.Text = string.Empty;
+                        lblTotal.Text = "0.00";
                     }
                     catch (Exception ex)
                     {

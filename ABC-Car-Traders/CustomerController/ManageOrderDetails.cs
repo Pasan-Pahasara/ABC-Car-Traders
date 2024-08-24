@@ -31,7 +31,8 @@ namespace ABC_Car_Traders.CustomerController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text to select all data from the CarOrder table
-                    string sqlCommandText = "SELECT * FROM CarOrderDetails";
+                    //string sqlCommandText = "SELECT * FROM CarOrderDetails";
+                    string sqlCommandText = "SELECT cpo.*, c.Name AS CustomerName, c.Address AS CustomerAddress, c.Contact AS CustomerContact, c.NIC AS CustomerNIC FROM CarOrderDetails cpo INNER JOIN Customer c ON cpo.CustomerId = c.ID";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         try
@@ -71,7 +72,8 @@ namespace ABC_Car_Traders.CustomerController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text to select all data from the CarPartOrder table
-                    string sqlCommandText = "SELECT * FROM CarPartOrderDetails";
+                    //string sqlCommandText = "SELECT * FROM CarPartOrderDetails";
+                    string sqlCommandText = "SELECT cpo.*, c.Name AS CustomerName, c.Address AS CustomerAddress, c.Contact AS CustomerContact, c.NIC AS CustomerNIC FROM CarPartOrderDetails cpo INNER JOIN Customer c ON cpo.CustomerId = c.ID";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         try

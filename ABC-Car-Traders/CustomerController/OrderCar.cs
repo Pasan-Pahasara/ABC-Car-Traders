@@ -18,6 +18,29 @@ namespace ABC_Car_Traders.CustomerController
             InitializeComponent();
         }
 
+        private void txtCarPrice_TextChanged(object sender, EventArgs e)
+        {
+            CalculateAndSetTotal();
+        }
+
+        private void txtCarQty_TextChanged(object sender, EventArgs e)
+        {
+            CalculateAndSetTotal();
+        }
+
+        private void CalculateAndSetTotal()
+        {
+            if (decimal.TryParse(txtCarPrice.Text, out decimal carPrice) && int.TryParse(txtCarQty.Text, out int carQty))
+            {
+                decimal total = carPrice * carQty;
+                lblTotal.Text = total.ToString();
+            }
+            else
+            {
+                lblTotal.Text = "0.00";
+            }
+        }
+
         private void OrderCar_Load(object sender, EventArgs e)
         {
             // Load data from both the Car and CarOrder tables on form load
@@ -209,7 +232,7 @@ namespace ABC_Car_Traders.CustomerController
                             sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarQty.Text));
                             sqlOrderCommand.Parameters.AddWithValue("@OrderDate", DateTime.Now);
                             sqlOrderCommand.Parameters.AddWithValue("@OrderStatus", "Pending"); // Or any status you want to set
-                            sqlOrderCommand.Parameters.AddWithValue("@Total", decimal.Parse(txtCarPrice.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@Total", decimal.Parse(lblTotal.Text));
 
                             sqlOrderCommand.ExecuteNonQuery();
                         }
@@ -244,7 +267,7 @@ namespace ABC_Car_Traders.CustomerController
                         ClearCarFields();
                         txtCustomerId.Text = string.Empty;
                         txtOrderId.Text = string.Empty;
-                        lblTotal.Text = string.Empty;
+                        lblTotal.Text = "0.00";
                     }
                     catch (Exception ex)
                     {

@@ -49,15 +49,15 @@
             this.txtCustomerId = new System.Windows.Forms.TextBox();
             this.btnCarPartOrder = new System.Windows.Forms.Button();
             this.txtOrderId = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvCarPartOrder = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarPart)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarPartOrder)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCarPart
@@ -111,16 +111,17 @@
             // 
             // txtCarPartQty
             // 
-            this.txtCarPartQty.Location = new System.Drawing.Point(492, 400);
+            this.txtCarPartQty.Location = new System.Drawing.Point(421, 400);
             this.txtCarPartQty.Name = "txtCarPartQty";
             this.txtCarPartQty.Size = new System.Drawing.Size(222, 22);
             this.txtCarPartQty.TabIndex = 84;
+            this.txtCarPartQty.TextChanged += new System.EventHandler(this.txtCarPartQty_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(380, 400);
+            this.label7.Location = new System.Drawing.Point(309, 400);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 20);
             this.label7.TabIndex = 83;
@@ -128,7 +129,7 @@
             // 
             // txtCarPartDescription
             // 
-            this.txtCarPartDescription.Location = new System.Drawing.Point(492, 351);
+            this.txtCarPartDescription.Location = new System.Drawing.Point(421, 351);
             this.txtCarPartDescription.Name = "txtCarPartDescription";
             this.txtCarPartDescription.ReadOnly = true;
             this.txtCarPartDescription.Size = new System.Drawing.Size(227, 22);
@@ -138,7 +139,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(380, 351);
+            this.label8.Location = new System.Drawing.Point(309, 351);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 20);
             this.label8.TabIndex = 81;
@@ -179,15 +180,16 @@
             this.txtCarPartPrice.Location = new System.Drawing.Point(121, 449);
             this.txtCarPartPrice.Name = "txtCarPartPrice";
             this.txtCarPartPrice.ReadOnly = true;
-            this.txtCarPartPrice.Size = new System.Drawing.Size(222, 22);
+            this.txtCarPartPrice.Size = new System.Drawing.Size(158, 22);
             this.txtCarPartPrice.TabIndex = 77;
+            this.txtCarPartPrice.TextChanged += new System.EventHandler(this.txtCarPartPrice_TextChanged);
             // 
             // txtCarPartName
             // 
             this.txtCarPartName.Location = new System.Drawing.Point(121, 349);
             this.txtCarPartName.Name = "txtCarPartName";
             this.txtCarPartName.ReadOnly = true;
-            this.txtCarPartName.Size = new System.Drawing.Size(222, 22);
+            this.txtCarPartName.Size = new System.Drawing.Size(158, 22);
             this.txtCarPartName.TabIndex = 76;
             // 
             // txtCarPartType
@@ -195,7 +197,7 @@
             this.txtCarPartType.Location = new System.Drawing.Point(121, 400);
             this.txtCarPartType.Name = "txtCarPartType";
             this.txtCarPartType.ReadOnly = true;
-            this.txtCarPartType.Size = new System.Drawing.Size(222, 22);
+            this.txtCarPartType.Size = new System.Drawing.Size(158, 22);
             this.txtCarPartType.TabIndex = 75;
             // 
             // label6
@@ -235,7 +237,7 @@
             // 
             // btnCarPartOrder
             // 
-            this.btnCarPartOrder.Location = new System.Drawing.Point(847, 449);
+            this.btnCarPartOrder.Location = new System.Drawing.Point(847, 464);
             this.btnCarPartOrder.Name = "btnCarPartOrder";
             this.btnCarPartOrder.Size = new System.Drawing.Size(131, 46);
             this.btnCarPartOrder.TabIndex = 70;
@@ -249,50 +251,6 @@
             this.txtOrderId.Name = "txtOrderId";
             this.txtOrderId.Size = new System.Drawing.Size(104, 22);
             this.txtOrderId.TabIndex = 68;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.flowLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.label12);
-            this.flowLayoutPanel1.Controls.Add(this.lblTotal);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(764, 318);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(214, 104);
-            this.flowLayoutPanel1.TabIndex = 66;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 28F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 56);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Total";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Century Gothic", 22F, System.Drawing.FontStyle.Bold);
-            this.label12.ForeColor = System.Drawing.Color.Brown;
-            this.label12.Location = new System.Drawing.Point(3, 56);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(76, 44);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Rs :";
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 22F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.ForeColor = System.Drawing.Color.Brown;
-            this.lblTotal.Location = new System.Drawing.Point(85, 56);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(92, 44);
-            this.lblTotal.TabIndex = 2;
-            this.lblTotal.Text = "0.00";
             // 
             // label4
             // 
@@ -315,11 +273,55 @@
             this.dgvCarPartOrder.Size = new System.Drawing.Size(938, 159);
             this.dgvCarPartOrder.TabIndex = 67;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.lblTotal);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Location = new System.Drawing.Point(668, 334);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(310, 118);
+            this.panel1.TabIndex = 85;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 22F, System.Drawing.FontStyle.Bold);
+            this.label14.ForeColor = System.Drawing.Color.Brown;
+            this.label14.Location = new System.Drawing.Point(5, 58);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 44);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Rs :";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 22F, System.Drawing.FontStyle.Bold);
+            this.lblTotal.ForeColor = System.Drawing.Color.Brown;
+            this.lblTotal.Location = new System.Drawing.Point(79, 58);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(92, 44);
+            this.lblTotal.TabIndex = 4;
+            this.lblTotal.Text = "0.00";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 28F, System.Drawing.FontStyle.Bold);
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 56);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Total";
+            // 
             // OrderCarPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtCarPartQty);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtCarPartDescription);
@@ -336,7 +338,6 @@
             this.Controls.Add(this.txtCustomerId);
             this.Controls.Add(this.btnCarPartOrder);
             this.Controls.Add(this.txtOrderId);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvCarPartOrder);
             this.Controls.Add(this.dgvCarPart);
@@ -348,9 +349,9 @@
             this.Size = new System.Drawing.Size(1041, 762);
             this.Load += new System.EventHandler(this.OrderCarPart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarPart)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarPartOrder)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,11 +380,11 @@
         private System.Windows.Forms.TextBox txtCustomerId;
         private System.Windows.Forms.Button btnCarPartOrder;
         private System.Windows.Forms.TextBox txtOrderId;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvCarPartOrder;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label13;
     }
 }
