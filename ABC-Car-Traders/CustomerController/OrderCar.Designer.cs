@@ -35,6 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.dgvCarOrder = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.txtOrderId = new System.Windows.Forms.TextBox();
@@ -112,20 +114,44 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.flowLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(778, 298);
+            this.flowLayoutPanel1.Controls.Add(this.label12);
+            this.flowLayoutPanel1.Controls.Add(this.lblTotal);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(764, 318);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 124);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(214, 104);
             this.flowLayoutPanel1.TabIndex = 39;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 25F, System.Drawing.FontStyle.Bold);
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 28F, System.Drawing.FontStyle.Bold);
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 49);
+            this.label3.Size = new System.Drawing.Size(130, 56);
             this.label3.TabIndex = 0;
             this.label3.Text = "Total";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Century Gothic", 22F, System.Drawing.FontStyle.Bold);
+            this.label12.ForeColor = System.Drawing.Color.Brown;
+            this.label12.Location = new System.Drawing.Point(3, 56);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(76, 44);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Rs :";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Century Gothic", 22F, System.Drawing.FontStyle.Bold);
+            this.lblTotal.ForeColor = System.Drawing.Color.Brown;
+            this.lblTotal.Location = new System.Drawing.Point(85, 56);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(92, 44);
+            this.lblTotal.TabIndex = 2;
+            this.lblTotal.Text = "0.00";
             // 
             // dgvCarOrder
             // 
@@ -163,6 +189,7 @@
             this.btnCarOrder.TabIndex = 51;
             this.btnCarOrder.Text = "+ Order Car";
             this.btnCarOrder.UseVisualStyleBackColor = true;
+            this.btnCarOrder.Click += new System.EventHandler(this.btnCarOrder_Click);
             // 
             // label5
             // 
@@ -356,5 +383,7 @@
         private System.Windows.Forms.TextBox txtCarBrand;
         private System.Windows.Forms.TextBox txtCarModel;
         private System.Windows.Forms.TextBox txtCarFuelType;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

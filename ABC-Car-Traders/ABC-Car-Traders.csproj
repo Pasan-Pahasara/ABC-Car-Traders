@@ -143,6 +143,12 @@
     <Compile Include="AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerController\ManageOrderDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomerController\ManageOrderDetails.Designer.cs">
+      <DependentUpon>ManageOrderDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerController\OrderCar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerController\ManageOrderDetails.resx">
+      <DependentUpon>ManageOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerController\OrderCar.resx">
       <DependentUpon>OrderCar.cs</DependentUpon>

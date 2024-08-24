@@ -20,11 +20,18 @@ namespace ABC_Car_Traders.CustomerController
 
         private void OrderCarPart_Load(object sender, EventArgs e)
         {
+            LoadCarPartData();
+            LoadCarPartOrderData();
+        }
+
+
+        private void LoadCarPartData()
+        {
             try
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    // Command Text with to select * data from the database table
+                    // Command Text to select all data from the CarPart table
                     string sqlCommandText = "SELECT * FROM CarPart";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
@@ -38,7 +45,7 @@ namespace ABC_Car_Traders.CustomerController
                             DataTable carPartTable = new DataTable();
                             // Fill the datatable by executing the command
                             sqlAdapter.Fill(carPartTable);
-                            // set the datagrid view's datasource 
+                            // Set the datagrid view's datasource 
                             dgvCarPart.DataSource = carPartTable;
                         }
                         catch (SqlException sqlEx)
@@ -56,7 +63,201 @@ namespace ABC_Car_Traders.CustomerController
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        private void LoadCarPartOrderData()
+        {
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    // Command Text to select all data from the CarPartOrder table
+                    string sqlCommandText = "SELECT * FROM CarPartOrder";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+                            // SQL adapter 
+                            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
+                            // Datatable
+                            DataTable carPartOrderTable = new DataTable();
+                            // Fill the datatable by executing the command
+                            sqlAdapter.Fill(carPartOrderTable);
+                            // Set the datagrid view's datasource 
+                            dgvCarPartOrder.DataSource = carPartOrderTable;
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            dbConnection.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dgvCarPart_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ensure the user clicks on a cell that is not a header
+            if (e.RowIndex >= 0)
+            {
+                // Get the current row
+                DataGridViewRow row = dgvCarPart.Rows[e.RowIndex];
+
+                // Assign the cell values to the text fields
+                txtCarPartId.Text = row.Cells[0].Value.ToString();
+                txtCarPartName.Text = row.Cells[1].Value.ToString();
+                txtCarPartDescription.Text = row.Cells[2].Value.ToString();
+                txtCarPartType.Text = row.Cells[3].Value.ToString();
+                txtCarPartPrice.Text = row.Cells[5].Value.ToString();
+            }
+        }
+
+        private void ClearCarFields()
+        {
+            txtCarPartId.Text = string.Empty;
+            txtCarPartName.Text = string.Empty;
+            txtCarPartDescription.Text = string.Empty;
+            txtCarPartType.Text = string.Empty;
+            txtCarPartQty.Text = string.Empty;
+            txtCarPartPrice.Text = string.Empty;
+        }
+
+        private void btnCarPartSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCarPartSearchId.Text))
+            {
+                MessageBox.Show("Please enter a Car ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    string sqlCommandText = "SELECT * FROM CarPart WHERE ID = @ID";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@ID"].Value = txtCarPartSearchId.Text;
+
+                        dbConnection.Open();
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Populate the text fields with the data
+                                txtCarPartId.Text = reader["ID"].ToString();
+                                txtCarPartName.Text = reader["Name"].ToString();
+                                txtCarPartDescription.Text = reader["Description"].ToString();
+                                txtCarPartType.Text = reader["Type"].ToString();
+                                txtCarPartPrice.Text = reader["Price"].ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Car ID not found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ClearCarFields();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error searching car: " + ex.Message);
+            }
+        }
+
+        private void btnCarPartOrder_Click(object sender, EventArgs e)
+        {
+            // Validate that all necessary fields are filled out
+            if (string.IsNullOrWhiteSpace(txtOrderId.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerId.Text) ||
+                string.IsNullOrWhiteSpace(txtCarPartId.Text) ||
+                string.IsNullOrWhiteSpace(txtCarPartQty.Text))
+            {
+                MessageBox.Show("Please fill in all fields before placing the order.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    dbConnection.Open();
+                    SqlTransaction transaction = dbConnection.BeginTransaction();
+
+                    try
+                    {
+                        // Insert the order into the Orders table
+                        string sqlCommandOrderText = "INSERT INTO CarPartOrder (OrderId, CustomerId, CarPartId, Quantity, OrderDate, OrderStatus, Total) VALUES (@OrderId, @CustomerId, @CarPartId, @Quantity, @OrderDate, @OrderStatus, @Total)";
+
+                        using (SqlCommand sqlOrderCommand = new SqlCommand(sqlCommandOrderText, dbConnection, transaction))
+                        {
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", txtOrderId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CarPartId", txtCarPartId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarPartQty.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderDate", DateTime.Now);
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderStatus", "Pending"); // Or any status you want to set
+                            sqlOrderCommand.Parameters.AddWithValue("@Total", decimal.Parse(txtCarPartPrice.Text));
+
+                            sqlOrderCommand.ExecuteNonQuery();
+                        }
+
+                        // Insert the order into the Orders table
+                        string sqlCommandOrderDetailsText = "INSERT INTO CarPartOrderDetails (OrderId, CustomerId, CarPartId, Name, Description, Type, Price, Quantity, OrderDate, OrderStatus) VALUES (@OrderId, @CustomerId, @CarPartId, @Name, @Description, @Type, @Price, @Quantity, @OrderDate, @OrderStatus)";
+
+                        using (SqlCommand sqlOrderCommand = new SqlCommand(sqlCommandOrderDetailsText, dbConnection, transaction))
+                        {
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", txtOrderId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CarPartId", txtCarPartId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Name", txtCarPartName.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Description", txtCarPartDescription.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Type", txtCarPartType.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Price", decimal.Parse(txtCarPartPrice.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarPartQty.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderDate", DateTime.Now);
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderStatus", "Pending"); // Or any status you want to set
+
+                            sqlOrderCommand.ExecuteNonQuery();
+                        }
+
+
+                        // Commit the transaction
+                        transaction.Commit();
+
+                        MessageBox.Show("Order placed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadCarPartOrderData();
+
+                        // Clear the fields after successful order
+                        ClearCarFields();
+                        txtCustomerId.Text = string.Empty;
+                        txtOrderId.Text = string.Empty;
+                        lblTotal.Text = string.Empty;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Rollback the transaction if there was an error
+                        transaction.Rollback();
+                        MessageBox.Show("Error placing order: " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error connecting to the database: " + ex.Message);
+            }
         }
     }
 }

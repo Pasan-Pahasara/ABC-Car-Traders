@@ -20,11 +20,18 @@ namespace ABC_Car_Traders.CustomerController
 
         private void OrderCar_Load(object sender, EventArgs e)
         {
+            // Load data from both the Car and CarOrder tables on form load
+            LoadCarData();
+            LoadCarOrderData();
+        }
+
+        private void LoadCarData()
+        {
             try
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    // Command Text with to select * data from the database table
+                    // Command Text to select all data from the Car table
                     string sqlCommandText = "SELECT * FROM Car";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
@@ -38,7 +45,7 @@ namespace ABC_Car_Traders.CustomerController
                             DataTable carTable = new DataTable();
                             // Fill the datatable by executing the command
                             sqlAdapter.Fill(carTable);
-                            // set the datagrid view's datasource 
+                            // Set the datagrid view's datasource 
                             dgvCar.DataSource = carTable;
                         }
                         catch (SqlException sqlEx)
@@ -56,7 +63,46 @@ namespace ABC_Car_Traders.CustomerController
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        private void LoadCarOrderData()
+        {
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    // Command Text to select all data from the CarOrder table
+                    string sqlCommandText = "SELECT * FROM CarOrder";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+                            // SQL adapter 
+                            SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
+                            // Datatable
+                            DataTable carOrderTable = new DataTable();
+                            // Fill the datatable by executing the command
+                            sqlAdapter.Fill(carOrderTable);
+                            // Set the datagrid view's datasource 
+                            dgvCarOrder.DataSource = carOrderTable;
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            dbConnection.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void dgvCar_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -128,6 +174,89 @@ namespace ABC_Car_Traders.CustomerController
             catch (Exception ex)
             {
                 MessageBox.Show("Error searching car: " + ex.Message);
+            }
+        }
+
+        private void btnCarOrder_Click(object sender, EventArgs e)
+        {
+            // Validate that all necessary fields are filled out
+            if (string.IsNullOrWhiteSpace(txtOrderId.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerId.Text) ||
+                string.IsNullOrWhiteSpace(txtCarId.Text) ||
+                string.IsNullOrWhiteSpace(txtCarQty.Text))
+            {
+                MessageBox.Show("Please fill in all fields before placing the order.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    dbConnection.Open();
+                    SqlTransaction transaction = dbConnection.BeginTransaction();
+
+                    try
+                    {
+                        // Insert the order into the Orders table
+                        string sqlCommandOrderText = "INSERT INTO CarOrder (OrderId, CustomerId, CarId, Quantity, OrderDate, OrderStatus, Total) VALUES (@OrderId, @CustomerId, @CarId, @Quantity, @OrderDate, @OrderStatus, @Total)";
+
+                        using (SqlCommand sqlOrderCommand = new SqlCommand(sqlCommandOrderText, dbConnection, transaction))
+                        {
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", txtOrderId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CarId", txtCarId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarQty.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderDate", DateTime.Now);
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderStatus", "Pending"); // Or any status you want to set
+                            sqlOrderCommand.Parameters.AddWithValue("@Total", decimal.Parse(txtCarPrice.Text));
+
+                            sqlOrderCommand.ExecuteNonQuery();
+                        }
+
+                        // Insert the order into the Orders table
+                        string sqlCommandOrderDetailsText = "INSERT INTO CarOrderDetails (OrderId, CustomerId, CarId, Model, Brand, FuelType, Price, Quantity, OrderDate, OrderStatus) VALUES (@OrderId, @CustomerId, @CarId, @Model, @Brand, @FuelType, @Price, @Quantity, @OrderDate, @OrderStatus)";
+
+                        using (SqlCommand sqlOrderCommand = new SqlCommand(sqlCommandOrderDetailsText, dbConnection, transaction))
+                        {
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", txtOrderId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@CarId", txtCarId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Model", txtCarModel.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Brand", txtCarBrand.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@FuelType", txtCarFuelType.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@Price", decimal.Parse(txtCarPrice.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarQty.Text));
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderDate", DateTime.Now);
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderStatus", "Pending"); // Or any status you want to set
+
+                            sqlOrderCommand.ExecuteNonQuery();
+                        }
+
+
+                        // Commit the transaction
+                        transaction.Commit();
+
+                        MessageBox.Show("Order placed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadCarOrderData();
+
+                        // Clear the fields after successful order
+                        ClearCarFields();
+                        txtCustomerId.Text = string.Empty;
+                        txtOrderId.Text = string.Empty;
+                        lblTotal.Text = string.Empty;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Rollback the transaction if there was an error
+                        transaction.Rollback();
+                        MessageBox.Show("Error placing order: " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error connecting to the database: " + ex.Message);
             }
         }
     }

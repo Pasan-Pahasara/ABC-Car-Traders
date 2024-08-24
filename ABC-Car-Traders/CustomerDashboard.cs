@@ -16,6 +16,8 @@ namespace ABC_Car_Traders
         public CustomerDashboard()
         {
             InitializeComponent();
+            OrderCar orderCar = new OrderCar();
+            AddCustomerControl(orderCar);
         }
 
         private void AddCustomerControl(UserControl userControl)
@@ -36,6 +38,12 @@ namespace ABC_Car_Traders
         {
             OrderCarPart orderCarPart = new OrderCarPart();
             AddCustomerControl(orderCarPart);
+        }
+
+        private void btnManageOrderDetails_Click(object sender, EventArgs e)
+        {
+            ManageOrderDetails manageOrderDetails = new ManageOrderDetails();
+            AddCustomerControl(manageOrderDetails);
         }
     }
 }

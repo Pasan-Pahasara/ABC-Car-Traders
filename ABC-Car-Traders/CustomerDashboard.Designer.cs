@@ -79,6 +79,7 @@
             this.btnManageOrderDetails.TabIndex = 4;
             this.btnManageOrderDetails.Text = "Manage Order Details";
             this.btnManageOrderDetails.UseVisualStyleBackColor = true;
+            this.btnManageOrderDetails.Click += new System.EventHandler(this.btnManageOrderDetails_Click);
             // 
             // btnOrderCarPart
             // 

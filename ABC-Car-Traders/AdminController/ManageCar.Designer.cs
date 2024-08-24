@@ -34,7 +34,7 @@
             this.btnCarDelete = new System.Windows.Forms.Button();
             this.btnCarUpdate = new System.Windows.Forms.Button();
             this.btnCarSearch = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerateCarReport = new System.Windows.Forms.Button();
             this.txtCarPrice = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -112,14 +112,15 @@
             this.btnCarSearch.UseVisualStyleBackColor = true;
             this.btnCarSearch.Click += new System.EventHandler(this.btnCarSearch_Click);
             // 
-            // button1
+            // btnGenerateCarReport
             // 
-            this.button1.Location = new System.Drawing.Point(829, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 46);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Generate Report";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGenerateCarReport.Location = new System.Drawing.Point(829, 28);
+            this.btnGenerateCarReport.Name = "btnGenerateCarReport";
+            this.btnGenerateCarReport.Size = new System.Drawing.Size(162, 46);
+            this.btnGenerateCarReport.TabIndex = 28;
+            this.btnGenerateCarReport.Text = "Generate Report";
+            this.btnGenerateCarReport.UseVisualStyleBackColor = true;
+            this.btnGenerateCarReport.Click += new System.EventHandler(this.btnGenerateCarReport_Click);
             // 
             // txtCarPrice
             // 
@@ -235,7 +236,7 @@
             this.Controls.Add(this.btnCarDelete);
             this.Controls.Add(this.btnCarUpdate);
             this.Controls.Add(this.btnCarSearch);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGenerateCarReport);
             this.Controls.Add(this.txtCarPrice);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -264,7 +265,7 @@
         private System.Windows.Forms.Button btnCarDelete;
         private System.Windows.Forms.Button btnCarUpdate;
         private System.Windows.Forms.Button btnCarSearch;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerateCarReport;
         private System.Windows.Forms.TextBox txtCarPrice;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
