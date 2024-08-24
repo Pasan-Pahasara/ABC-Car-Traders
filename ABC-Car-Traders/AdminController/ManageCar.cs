@@ -1,4 +1,6 @@
-﻿using PdfSharp.Drawing;
+﻿using OfficeOpenXml.Style;
+using OfficeOpenXml;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -308,110 +310,84 @@ namespace ABC_Car_Traders.AdminController
         {
             try
             {
-                // Set the PDF file path
-                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CarReport.pdf");
-
-                // Check if the file exists and is in use
-                if (File.Exists(filePath))
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    try
+                    string sqlCommandText = "SELECT * FROM Car";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
-                        // Attempt to delete the file to check if it's in use
-                        File.Delete(filePath);
-                    }
-                    catch (IOException)
-                    {
-                        MessageBox.Show("The file is currently in use. Please close the file and try again.", "File In Use", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
+                        dbConnection.Open();
+                        SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
+                        DataTable carTable = new DataTable();
+                        sqlAdapter.Fill(carTable);
 
-                // Create a new PDF document
-                PdfDocument document = new PdfDocument();
-                document.Info.Title = "Car Details Report";
+                        // Ensure EPPlus License is set using fully qualified name
+                        OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
-                // Create an empty page
-                PdfPage page = document.AddPage();
-
-                // Get an XGraphics object for drawing
-                XGraphics gfx = XGraphics.FromPdfPage(page);
-
-                // Create fonts
-                XFont titleFont = new XFont("Verdana", 20, XFontStyleEx.Bold);
-                XFont headerFont = new XFont("Verdana", 12, XFontStyleEx.Bold);
-                XFont cellFont = new XFont("Verdana", 12, XFontStyleEx.Regular);
-
-                // Define a top margin for the title
-                int titleTopMargin = 40;
-
-                // Draw the title on the PDF page
-                gfx.DrawString("Car Details Report", titleFont, XBrushes.Black, new XRect(0, titleTopMargin, page.Width, page.Height), XStringFormats.TopCenter);
-
-                // Define starting points for the table
-                int cellHeight = 20;
-                int yPoint = titleTopMargin + 40; // Adjust starting Y point after the title
-                int columnCount = dgvCar.Columns.Count;
-                int tableWidth = 100 * columnCount; // Assuming each column is 100 units wide
-                int xPoint = (int)((page.Width - tableWidth) / 2); // Center the table
-
-                // Draw table headers
-                for (int i = 0; i < columnCount; i++)
-                {
-                    // Draw header text
-                    gfx.DrawString(dgvCar.Columns[i].HeaderText, headerFont, XBrushes.Black, new XRect(xPoint, yPoint, 100, cellHeight), XStringFormats.Center);
-
-                    // Draw header border
-                    gfx.DrawRectangle(XPens.Black, xPoint, yPoint, 100, cellHeight);
-
-                    xPoint += 100;
-                }
-
-                yPoint += cellHeight; // Move down for the first row of data
-                xPoint = (int)((page.Width - tableWidth) / 2); // Reset xPoint for the data rows
-
-                // Add data from DataGridView (example)
-                foreach (DataGridViewRow row in dgvCar.Rows)
-                {
-                    if (!row.IsNewRow)
-                    {
-                        for (int i = 0; i < columnCount; i++)
+                        using (ExcelPackage excelPackage = new ExcelPackage())
                         {
-                            string cellValue = row.Cells[i].Value?.ToString() ?? "N/A";
+                            // Add a new worksheet to the Excel file
+                            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Cars");
 
-                            // Draw cell text
-                            gfx.DrawString(cellValue, cellFont, XBrushes.Black, new XRect(xPoint, yPoint, 100, cellHeight), XStringFormats.Center);
+                            // Load data from the DataTable to the worksheet
+                            worksheet.Cells["A1"].LoadFromDataTable(carTable, true);
 
-                            // Draw cell border
-                            gfx.DrawRectangle(XPens.Black, xPoint, yPoint, 100, cellHeight);
 
-                            xPoint += 100;
+                            // Determine the number of columns in the DataTable
+                            int columnCount = carTable.Columns.Count;
+
+                            // Convert the column count to an Excel range (e.g., "A1:E1")
+                            string endColumnLetter = GetExcelColumnName(columnCount);
+                            string headerRange = $"A1:{endColumnLetter}1";
+
+                            // Format the header
+                            using (ExcelRange range = worksheet.Cells[headerRange])
+                            {
+                                range.Style.Font.Bold = true;
+                                range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(79, 129, 189));
+                                range.Style.Font.Color.SetColor(System.Drawing.Color.White);
+                            }
+
+                            // Auto-fit the columns
+                            worksheet.Cells.AutoFitColumns();
+
+                            // Define the file path to save the Excel file
+                            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "CarsReport.xlsx");
+
+                            // Save the file
+                            File.WriteAllBytes(filePath, excelPackage.GetAsByteArray());
+
+                            // Open the file
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                            {
+                                FileName = filePath,
+                                UseShellExecute = true
+                            });
+
+                            MessageBox.Show("Cars report generated and opened successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-
-                        yPoint += cellHeight; // Move down for the next row of data
-                        xPoint = (int)((page.Width - tableWidth) / 2); // Reset xPoint for the next row
                     }
                 }
-
-                // Save the document
-                document.Save(filePath);
-
-                // Open the PDF document using the default PDF viewer
-                Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
-
-                MessageBox.Show("PDF report generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show("Access to the path is denied: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show("I/O error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error generating PDF report: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error generating report: " + ex.Message);
             }
+        }
+
+        private string GetExcelColumnName(int columnIndex)
+        {
+            const int lettersInAlphabet = 26;
+            string columnName = string.Empty;
+
+            while (columnIndex > 0)
+            {
+                int modulo = (columnIndex - 1) % lettersInAlphabet;
+                columnName = Convert.ToChar('A' + modulo) + columnName;
+                columnIndex = (columnIndex - modulo) / lettersInAlphabet;
+            }
+
+            return columnName;
         }
     }
 }

@@ -39,7 +39,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCustomerNIC = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
             this.btnCustomerSearch = new System.Windows.Forms.Button();
             this.btnCustomerUpdate = new System.Windows.Forms.Button();
             this.btnCustomerDelete = new System.Windows.Forms.Button();
@@ -143,14 +143,15 @@
             this.txtCustomerNIC.Size = new System.Drawing.Size(371, 22);
             this.txtCustomerNIC.TabIndex = 10;
             // 
-            // button1
+            // btnGenerateCustomerReport
             // 
-            this.button1.Location = new System.Drawing.Point(829, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 46);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Generate Report";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGenerateCustomerReport.Location = new System.Drawing.Point(829, 28);
+            this.btnGenerateCustomerReport.Name = "btnGenerateCustomerReport";
+            this.btnGenerateCustomerReport.Size = new System.Drawing.Size(162, 46);
+            this.btnGenerateCustomerReport.TabIndex = 11;
+            this.btnGenerateCustomerReport.Text = "Generate Report";
+            this.btnGenerateCustomerReport.UseVisualStyleBackColor = true;
+            this.btnGenerateCustomerReport.Click += new System.EventHandler(this.btnGenerateCustomerReport_Click);
             // 
             // btnCustomerSearch
             // 
@@ -214,7 +215,7 @@
             this.Controls.Add(this.btnCustomerDelete);
             this.Controls.Add(this.btnCustomerUpdate);
             this.Controls.Add(this.btnCustomerSearch);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGenerateCustomerReport);
             this.Controls.Add(this.txtCustomerNIC);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -248,7 +249,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtCustomerNIC;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerateCustomerReport;
         private System.Windows.Forms.Button btnCustomerSearch;
         private System.Windows.Forms.Button btnCustomerUpdate;
         private System.Windows.Forms.Button btnCustomerDelete;

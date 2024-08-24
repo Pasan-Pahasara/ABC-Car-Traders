@@ -33,7 +33,7 @@
             this.btnCarPartDelete = new System.Windows.Forms.Button();
             this.btnCarPartUpdate = new System.Windows.Forms.Button();
             this.btnCarPartSearch = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerateCarPartReport = new System.Windows.Forms.Button();
             this.txtCarPartQty = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -102,14 +102,15 @@
             this.btnCarPartSearch.UseVisualStyleBackColor = true;
             this.btnCarPartSearch.Click += new System.EventHandler(this.btnCarPartSearch_Click);
             // 
-            // button1
+            // btnGenerateCarPartReport
             // 
-            this.button1.Location = new System.Drawing.Point(829, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 46);
-            this.button1.TabIndex = 45;
-            this.button1.Text = "Generate Report";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGenerateCarPartReport.Location = new System.Drawing.Point(829, 28);
+            this.btnGenerateCarPartReport.Name = "btnGenerateCarPartReport";
+            this.btnGenerateCarPartReport.Size = new System.Drawing.Size(162, 46);
+            this.btnGenerateCarPartReport.TabIndex = 45;
+            this.btnGenerateCarPartReport.Text = "Generate Report";
+            this.btnGenerateCarPartReport.UseVisualStyleBackColor = true;
+            this.btnGenerateCarPartReport.Click += new System.EventHandler(this.btnGenerateCarPartReport_Click);
             // 
             // txtCarPartQty
             // 
@@ -235,7 +236,7 @@
             this.Controls.Add(this.btnCarPartDelete);
             this.Controls.Add(this.btnCarPartUpdate);
             this.Controls.Add(this.btnCarPartSearch);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGenerateCarPartReport);
             this.Controls.Add(this.txtCarPartQty);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -263,7 +264,7 @@
         private System.Windows.Forms.Button btnCarPartDelete;
         private System.Windows.Forms.Button btnCarPartUpdate;
         private System.Windows.Forms.Button btnCarPartSearch;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerateCarPartReport;
         private System.Windows.Forms.TextBox txtCarPartQty;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

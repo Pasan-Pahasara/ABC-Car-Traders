@@ -30,7 +30,7 @@
         {
             this.dgvCarOrderDetail = new System.Windows.Forms.DataGridView();
             this.btnCarOrderSearch = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerateCarOrderDetailsReport = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCarStatus = new System.Windows.Forms.TextBox();
@@ -38,7 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCarPartOrderDetail = new System.Windows.Forms.DataGridView();
             this.btnCarOrderPartSearch = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnGenerateCarPartOrderDetailsReport = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCarPartStatus = new System.Windows.Forms.TextBox();
@@ -71,14 +71,15 @@
             this.btnCarOrderSearch.UseVisualStyleBackColor = true;
             this.btnCarOrderSearch.Click += new System.EventHandler(this.btnCarSearch_Click);
             // 
-            // button1
+            // btnGenerateCarOrderDetailsReport
             // 
-            this.button1.Location = new System.Drawing.Point(829, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 46);
-            this.button1.TabIndex = 55;
-            this.button1.Text = "Generate Report";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGenerateCarOrderDetailsReport.Location = new System.Drawing.Point(829, 28);
+            this.btnGenerateCarOrderDetailsReport.Name = "btnGenerateCarOrderDetailsReport";
+            this.btnGenerateCarOrderDetailsReport.Size = new System.Drawing.Size(162, 46);
+            this.btnGenerateCarOrderDetailsReport.TabIndex = 55;
+            this.btnGenerateCarOrderDetailsReport.Text = "Generate Report";
+            this.btnGenerateCarOrderDetailsReport.UseVisualStyleBackColor = true;
+            this.btnGenerateCarOrderDetailsReport.Click += new System.EventHandler(this.btnGenerateCarOrderDetailsReport_Click);
             // 
             // label3
             // 
@@ -145,14 +146,15 @@
             this.btnCarOrderPartSearch.UseVisualStyleBackColor = true;
             this.btnCarOrderPartSearch.Click += new System.EventHandler(this.btnCarOrderPartSearch_Click);
             // 
-            // button3
+            // btnGenerateCarPartOrderDetailsReport
             // 
-            this.button3.Location = new System.Drawing.Point(829, 379);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(162, 46);
-            this.button3.TabIndex = 63;
-            this.button3.Text = "Generate Report";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnGenerateCarPartOrderDetailsReport.Location = new System.Drawing.Point(829, 379);
+            this.btnGenerateCarPartOrderDetailsReport.Name = "btnGenerateCarPartOrderDetailsReport";
+            this.btnGenerateCarPartOrderDetailsReport.Size = new System.Drawing.Size(162, 46);
+            this.btnGenerateCarPartOrderDetailsReport.TabIndex = 63;
+            this.btnGenerateCarPartOrderDetailsReport.Text = "Generate Report";
+            this.btnGenerateCarPartOrderDetailsReport.UseVisualStyleBackColor = true;
+            this.btnGenerateCarPartOrderDetailsReport.Click += new System.EventHandler(this.btnGenerateCarPartOrderDetailsReport_Click);
             // 
             // label4
             // 
@@ -227,7 +229,7 @@
             this.Controls.Add(this.btnCarOrderUpdateStatus);
             this.Controls.Add(this.dgvCarPartOrderDetail);
             this.Controls.Add(this.btnCarOrderPartSearch);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnGenerateCarPartOrderDetailsReport);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtCarPartStatus);
@@ -235,7 +237,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvCarOrderDetail);
             this.Controls.Add(this.btnCarOrderSearch);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGenerateCarOrderDetailsReport);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCarStatus);
@@ -255,7 +257,7 @@
 
         private System.Windows.Forms.DataGridView dgvCarOrderDetail;
         private System.Windows.Forms.Button btnCarOrderSearch;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerateCarOrderDetailsReport;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCarStatus;
@@ -263,7 +265,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvCarPartOrderDetail;
         private System.Windows.Forms.Button btnCarOrderPartSearch;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnGenerateCarPartOrderDetailsReport;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCarPartStatus;

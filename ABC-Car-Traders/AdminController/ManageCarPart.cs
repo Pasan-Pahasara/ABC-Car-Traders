@@ -1,9 +1,12 @@
-﻿using System;
+﻿using OfficeOpenXml.Style;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -305,6 +308,90 @@ namespace ABC_Car_Traders.AdminController
             {
                 MessageBox.Show("Error searching car part: " + ex.Message);
             }
+        }
+
+        private void btnGenerateCarPartReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    string sqlCommandText = "SELECT * FROM CarPart";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        dbConnection.Open();
+                        SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
+                        DataTable carPartTable = new DataTable();
+                        sqlAdapter.Fill(carPartTable);
+
+                        // Ensure EPPlus License is set using fully qualified name
+                        OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+                        using (ExcelPackage excelPackage = new ExcelPackage())
+                        {
+                            // Add a new worksheet to the Excel file
+                            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("CarParts");
+
+                            // Load data from the DataTable to the worksheet
+                            worksheet.Cells["A1"].LoadFromDataTable(carPartTable, true);
+
+
+                            // Determine the number of columns in the DataTable
+                            int columnCount = carPartTable.Columns.Count;
+
+                            // Convert the column count to an Excel range (e.g., "A1:E1")
+                            string endColumnLetter = GetExcelColumnName(columnCount);
+                            string headerRange = $"A1:{endColumnLetter}1";
+
+                            // Format the header
+                            using (ExcelRange range = worksheet.Cells[headerRange])
+                            {
+                                range.Style.Font.Bold = true;
+                                range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(79, 129, 189));
+                                range.Style.Font.Color.SetColor(System.Drawing.Color.White);
+                            }
+
+                            // Auto-fit the columns
+                            worksheet.Cells.AutoFitColumns();
+
+                            // Define the file path to save the Excel file
+                            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "CarPartsReport.xlsx");
+
+                            // Save the file
+                            File.WriteAllBytes(filePath, excelPackage.GetAsByteArray());
+
+                            // Open the file
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                            {
+                                FileName = filePath,
+                                UseShellExecute = true
+                            });
+
+                            MessageBox.Show("Car Parts report generated and opened successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating report: " + ex.Message);
+            }
+        }
+
+        private string GetExcelColumnName(int columnIndex)
+        {
+            const int lettersInAlphabet = 26;
+            string columnName = string.Empty;
+
+            while (columnIndex > 0)
+            {
+                int modulo = (columnIndex - 1) % lettersInAlphabet;
+                columnName = Convert.ToChar('A' + modulo) + columnName;
+                columnIndex = (columnIndex - modulo) / lettersInAlphabet;
+            }
+
+            return columnName;
         }
     }
 }
