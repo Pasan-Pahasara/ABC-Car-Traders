@@ -36,11 +36,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.adminContainer = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnDashBoard = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnDashBoard);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnManageOrderDetails);
             this.panel1.Controls.Add(this.btnManageCarPart);
             this.panel1.Controls.Add(this.btnManageCar);
@@ -55,7 +60,7 @@
             // 
             // btnManageOrderDetails
             // 
-            this.btnManageOrderDetails.Location = new System.Drawing.Point(27, 331);
+            this.btnManageOrderDetails.Location = new System.Drawing.Point(27, 394);
             this.btnManageOrderDetails.Name = "btnManageOrderDetails";
             this.btnManageOrderDetails.Size = new System.Drawing.Size(184, 48);
             this.btnManageOrderDetails.TabIndex = 5;
@@ -65,7 +70,7 @@
             // 
             // btnManageCarPart
             // 
-            this.btnManageCarPart.Location = new System.Drawing.Point(27, 267);
+            this.btnManageCarPart.Location = new System.Drawing.Point(27, 330);
             this.btnManageCarPart.Name = "btnManageCarPart";
             this.btnManageCarPart.Size = new System.Drawing.Size(184, 48);
             this.btnManageCarPart.TabIndex = 4;
@@ -75,7 +80,7 @@
             // 
             // btnManageCar
             // 
-            this.btnManageCar.Location = new System.Drawing.Point(27, 203);
+            this.btnManageCar.Location = new System.Drawing.Point(27, 266);
             this.btnManageCar.Name = "btnManageCar";
             this.btnManageCar.Size = new System.Drawing.Size(184, 48);
             this.btnManageCar.TabIndex = 3;
@@ -85,7 +90,7 @@
             // 
             // btnManageCustomer
             // 
-            this.btnManageCustomer.Location = new System.Drawing.Point(27, 140);
+            this.btnManageCustomer.Location = new System.Drawing.Point(27, 203);
             this.btnManageCustomer.Name = "btnManageCustomer";
             this.btnManageCustomer.Size = new System.Drawing.Size(184, 48);
             this.btnManageCustomer.TabIndex = 2;
@@ -122,6 +127,26 @@
             this.adminContainer.Size = new System.Drawing.Size(1041, 762);
             this.adminContainer.TabIndex = 1;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ABC_Car_Traders.Properties.Resources.logout;
+            this.pictureBox1.Location = new System.Drawing.Point(96, 659);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(34, 37);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnDashBoard
+            // 
+            this.btnDashBoard.Location = new System.Drawing.Point(27, 142);
+            this.btnDashBoard.Name = "btnDashBoard";
+            this.btnDashBoard.Size = new System.Drawing.Size(184, 48);
+            this.btnDashBoard.TabIndex = 7;
+            this.btnDashBoard.Text = "DashBoard";
+            this.btnDashBoard.UseVisualStyleBackColor = true;
+            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
+            // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -135,6 +160,7 @@
             this.Text = "AdminDashboard";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -149,6 +175,8 @@
         private System.Windows.Forms.Button btnManageCar;
         private System.Windows.Forms.Button btnManageCarPart;
         private System.Windows.Forms.Button btnManageOrderDetails;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnDashBoard;
     }
 }
 

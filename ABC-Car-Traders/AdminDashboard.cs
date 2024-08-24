@@ -16,6 +16,8 @@ namespace ABC_Car_Traders
         public AdminDashboard()
         {
             InitializeComponent();
+            DashBoard dashBoard = new DashBoard();
+            AddAdminControl(dashBoard);
         }
 
         private void AddAdminControl(UserControl userControl)
@@ -48,6 +50,12 @@ namespace ABC_Car_Traders
         {
             ManageOrderDetails manageOrderDetails = new ManageOrderDetails();
             AddAdminControl(manageOrderDetails);
+        }
+
+        private void btnDashBoard_Click(object sender, EventArgs e)
+        {
+            DashBoard dashBoard = new DashBoard();
+            AddAdminControl(dashBoard);
         }
     }
 }

@@ -50,7 +50,6 @@
             // 
             // dgvCarOrderDetail
             // 
-            this.dgvCarOrderDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCarOrderDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarOrderDetail.Location = new System.Drawing.Point(40, 132);
             this.dgvCarOrderDetail.Name = "dgvCarOrderDetail";
@@ -123,7 +122,6 @@
             // 
             // dgvCarPartOrderDetail
             // 
-            this.dgvCarPartOrderDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCarPartOrderDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarPartOrderDetail.Location = new System.Drawing.Point(40, 482);
             this.dgvCarPartOrderDetail.Name = "dgvCarPartOrderDetail";
@@ -217,6 +215,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ManageOrderDetails";
             this.Size = new System.Drawing.Size(1041, 762);
+            this.Load += new System.EventHandler(this.ManageOrderDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarOrderDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarPartOrderDetail)).EndInit();
             this.ResumeLayout(false);
