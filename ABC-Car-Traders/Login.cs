@@ -8,14 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ABC_Car_Traders
 {
     public partial class Login : Form
     {
+        private string _loggedInId;
         public Login()
         {
             InitializeComponent();
+            _loggedInId = "";
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -36,7 +39,7 @@ namespace ABC_Car_Traders
             {
                 if (ValidateCustomerCredentials(email, password))
                 {
-                    OpenCustomerDashboard();
+                    OpenCustomerDashboard(_loggedInId);
                 }
                 else if (ValidateAdminCredentials(email, password))
                 {
@@ -57,7 +60,7 @@ namespace ABC_Car_Traders
         {
             string passPhrase = "customerpass";
 
-            string sqlCommandText = "SELECT Email FROM Customer WHERE CONVERT(varchar,DecryptByPassphrase(@Passphrase, Password))=@Password AND Email = @Email";
+            string sqlCommandText = "SELECT ID Email FROM Customer WHERE CONVERT(varchar,DecryptByPassphrase(@Passphrase, Password))=@Password AND Email = @Email";
 
             using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
             using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, connection))
@@ -73,6 +76,9 @@ namespace ABC_Car_Traders
 
                 connection.Open();
                 object result = sqlCommand.ExecuteScalar();
+                if (result != null) {
+                    _loggedInId = result.ToString();
+                }
                 return result != null;
             }
         }
@@ -96,9 +102,9 @@ namespace ABC_Car_Traders
             }
         }
 
-        private void OpenCustomerDashboard()
+        private void OpenCustomerDashboard(string loggedInId)
         {
-            CustomerDashboard customerDashboard = new CustomerDashboard();
+            CustomerDashboard customerDashboard = new CustomerDashboard(loggedInId);
             customerDashboard.FormClosed += (s, args) => this.Close();
             customerDashboard.Show();
             this.Hide();

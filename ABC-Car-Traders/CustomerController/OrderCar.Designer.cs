@@ -54,9 +54,9 @@ namespace ABC_Car_Traders.CustomerController
             this.txtCarModel = new System.Windows.Forms.TextBox();
             this.txtCarFuelType = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarOrder)).BeginInit();
             this.panel1.SuspendLayout();
@@ -163,6 +163,7 @@ namespace ABC_Car_Traders.CustomerController
             // 
             this.txtCustomerId.Location = new System.Drawing.Point(359, 298);
             this.txtCustomerId.Name = "txtCustomerId";
+            this.txtCustomerId.ReadOnly = true;
             this.txtCustomerId.Size = new System.Drawing.Size(104, 22);
             this.txtCustomerId.TabIndex = 52;
             // 
@@ -286,16 +287,6 @@ namespace ABC_Car_Traders.CustomerController
             this.panel1.Size = new System.Drawing.Size(354, 118);
             this.panel1.TabIndex = 66;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 28F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(130, 56);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Total";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -317,6 +308,16 @@ namespace ABC_Car_Traders.CustomerController
             this.lblTotal.Size = new System.Drawing.Size(92, 44);
             this.lblTotal.TabIndex = 4;
             this.lblTotal.Text = "0.00";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 28F, System.Drawing.FontStyle.Bold);
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 56);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Total";
             // 
             // OrderCar
             // 

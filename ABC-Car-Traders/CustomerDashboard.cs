@@ -13,10 +13,13 @@ namespace ABC_Car_Traders
 {
     public partial class CustomerDashboard : Form
     {
-        public CustomerDashboard()
+        private string _loggedInEmail;
+
+        public CustomerDashboard(string email)
         {
             InitializeComponent();
-            OrderCar orderCar = new OrderCar();
+            _loggedInEmail = email;
+            OrderCar orderCar = new OrderCar(_loggedInEmail);
             AddCustomerControl(orderCar);
         }
 
@@ -30,19 +33,19 @@ namespace ABC_Car_Traders
 
         private void btnOrderCar_Click(object sender, EventArgs e)
         {
-            OrderCar orderCar = new OrderCar();
+            OrderCar orderCar = new OrderCar(_loggedInEmail);
             AddCustomerControl(orderCar);
         }
 
         private void btnOrderCarPart_Click(object sender, EventArgs e)
         {
-            OrderCarPart orderCarPart = new OrderCarPart();
+            OrderCarPart orderCarPart = new OrderCarPart(_loggedInEmail);
             AddCustomerControl(orderCarPart);
         }
 
         private void btnManageOrderDetails_Click(object sender, EventArgs e)
         {
-            ManageOrderDetails manageOrderDetails = new ManageOrderDetails();
+            ManageOrderDetails manageOrderDetails = new ManageOrderDetails(_loggedInEmail);
             AddCustomerControl(manageOrderDetails);
         }
 

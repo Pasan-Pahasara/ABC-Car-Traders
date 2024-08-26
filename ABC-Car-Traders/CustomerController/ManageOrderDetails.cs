@@ -13,9 +13,12 @@ namespace ABC_Car_Traders.CustomerController
 {
     public partial class ManageOrderDetails : UserControl
     {
-        public ManageOrderDetails()
+        private string _loggedInId;
+
+        public ManageOrderDetails(string loggedInId)
         {
             InitializeComponent();
+            _loggedInId = loggedInId;
         }
 
         private void ManageOrderDetails_Load(object sender, EventArgs e)
@@ -31,10 +34,10 @@ namespace ABC_Car_Traders.CustomerController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text to select all data from the CarOrder table
-                    //string sqlCommandText = "SELECT * FROM CarOrderDetails";
-                    string sqlCommandText = "SELECT cpo.*, c.Name AS CustomerName, c.Address AS CustomerAddress, c.Contact AS CustomerContact, c.NIC AS CustomerNIC FROM CarOrderDetails cpo INNER JOIN Customer c ON cpo.CustomerId = c.ID";
+                    string sqlCommandText = "SELECT cpo.*, c.Name AS CustomerName, c.Address AS CustomerAddress, c.Contact AS CustomerContact, c.NIC AS CustomerNIC FROM CarOrderDetails cpo INNER JOIN Customer c ON cpo.CustomerId = c.ID WHERE cpo.CustomerId = @ID";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
+                        sqlCommand.Parameters.AddWithValue("@ID", _loggedInId);
                         try
                         {
                             // Open database connection
@@ -72,10 +75,10 @@ namespace ABC_Car_Traders.CustomerController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text to select all data from the CarPartOrder table
-                    //string sqlCommandText = "SELECT * FROM CarPartOrderDetails";
-                    string sqlCommandText = "SELECT cpo.*, c.Name AS CustomerName, c.Address AS CustomerAddress, c.Contact AS CustomerContact, c.NIC AS CustomerNIC FROM CarPartOrderDetails cpo INNER JOIN Customer c ON cpo.CustomerId = c.ID";
+                    string sqlCommandText = "SELECT cpo.*, c.Name AS CustomerName, c.Address AS CustomerAddress, c.Contact AS CustomerContact, c.NIC AS CustomerNIC FROM CarPartOrderDetails cpo INNER JOIN Customer c ON cpo.CustomerId = c.ID WHERE cpo.CustomerId = @ID";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
+                        sqlCommand.Parameters.AddWithValue("@ID", _loggedInId);
                         try
                         {
                             // Open database connection

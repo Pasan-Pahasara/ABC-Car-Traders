@@ -13,9 +13,10 @@ namespace ABC_Car_Traders.CustomerController
 {
     public partial class OrderCar : UserControl
     {
-        public OrderCar()
+        public OrderCar(string loggedInId)
         {
             InitializeComponent();
+            txtCustomerId.Text = loggedInId;
         }
 
         private void txtCarPrice_TextChanged(object sender, EventArgs e)
