@@ -13,10 +13,13 @@ namespace ABC_Car_Traders.CustomerController
 {
     public partial class OrderCar : UserControl
     {
+        private string _loggedInId;
+
         public OrderCar(string loggedInId)
         {
             InitializeComponent();
             txtCustomerId.Text = loggedInId;
+            _loggedInId = loggedInId;
         }
 
         private void txtCarPrice_TextChanged(object sender, EventArgs e)
@@ -96,9 +99,12 @@ namespace ABC_Car_Traders.CustomerController
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text to select all data from the CarOrder table
-                    string sqlCommandText = "SELECT * FROM CarOrder";
+                    string sqlCommandText = " SELECT* FROM CarOrder WHERE CustomerId = @CustomerId";
+
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
+                        sqlCommand.Parameters.AddWithValue("@CustomerId", _loggedInId);
+
                         try
                         {
                             // Open database connection
@@ -204,14 +210,14 @@ namespace ABC_Car_Traders.CustomerController
         private void btnCarOrder_Click(object sender, EventArgs e)
         {
             // Validate that all necessary fields are filled out
-            if (string.IsNullOrWhiteSpace(txtOrderId.Text) ||
-                string.IsNullOrWhiteSpace(txtCustomerId.Text) ||
+            if (string.IsNullOrWhiteSpace(txtCustomerId.Text) ||
                 string.IsNullOrWhiteSpace(txtCarId.Text) ||
                 string.IsNullOrWhiteSpace(txtCarQty.Text))
             {
                 MessageBox.Show("Please fill in all fields before placing the order.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string carOrderId = GenerateCarOrderId();
 
             try
             {
@@ -227,7 +233,7 @@ namespace ABC_Car_Traders.CustomerController
 
                         using (SqlCommand sqlOrderCommand = new SqlCommand(sqlCommandOrderText, dbConnection, transaction))
                         {
-                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", txtOrderId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", carOrderId);
                             sqlOrderCommand.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
                             sqlOrderCommand.Parameters.AddWithValue("@CarId", txtCarId.Text);
                             sqlOrderCommand.Parameters.AddWithValue("@Quantity", int.Parse(txtCarQty.Text));
@@ -243,7 +249,7 @@ namespace ABC_Car_Traders.CustomerController
 
                         using (SqlCommand sqlOrderCommand = new SqlCommand(sqlCommandOrderDetailsText, dbConnection, transaction))
                         {
-                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", txtOrderId.Text);
+                            sqlOrderCommand.Parameters.AddWithValue("@OrderId", carOrderId);
                             sqlOrderCommand.Parameters.AddWithValue("@CustomerId", txtCustomerId.Text);
                             sqlOrderCommand.Parameters.AddWithValue("@CarId", txtCarId.Text);
                             sqlOrderCommand.Parameters.AddWithValue("@Model", txtCarModel.Text);
@@ -267,7 +273,6 @@ namespace ABC_Car_Traders.CustomerController
                         // Clear the fields after successful order
                         ClearCarFields();
                         txtCustomerId.Text = string.Empty;
-                        txtOrderId.Text = string.Empty;
                         lblTotal.Text = "0.00";
                     }
                     catch (Exception ex)
@@ -282,6 +287,40 @@ namespace ABC_Car_Traders.CustomerController
             {
                 MessageBox.Show("Error connecting to the database: " + ex.Message);
             }
+        }
+
+        private string GenerateCarOrderId()
+        {
+            string newId = "R001";
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    dbConnection.Open();
+
+                    // Get the last carOrder ID
+                    string sqlCommandText = "SELECT TOP 1 OrderId FROM CarOrder ORDER BY OrderId DESC";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        object result = sqlCommand.ExecuteScalar();
+                        if (result != null)
+                        {
+                            string lastId = result.ToString();
+                            int numericPart = int.Parse(lastId.Substring(1)) + 1;
+                            newId = "R" + numericPart.ToString("D3");
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return newId;
         }
     }
 }

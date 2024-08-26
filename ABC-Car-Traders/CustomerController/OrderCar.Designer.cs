@@ -36,8 +36,6 @@ namespace ABC_Car_Traders.CustomerController
             this.txtCarSearchId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCarOrder = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtOrderId = new System.Windows.Forms.TextBox();
             this.btnCarOrder = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCustomerId = new System.Windows.Forms.TextBox();
@@ -122,23 +120,6 @@ namespace ABC_Car_Traders.CustomerController
             this.dgvCarOrder.Size = new System.Drawing.Size(938, 159);
             this.dgvCarOrder.TabIndex = 40;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(39, 300);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 20);
-            this.label4.TabIndex = 42;
-            this.label4.Text = "Order ID";
-            // 
-            // txtOrderId
-            // 
-            this.txtOrderId.Location = new System.Drawing.Point(121, 298);
-            this.txtOrderId.Name = "txtOrderId";
-            this.txtOrderId.Size = new System.Drawing.Size(104, 22);
-            this.txtOrderId.TabIndex = 41;
-            // 
             // btnCarOrder
             // 
             this.btnCarOrder.Location = new System.Drawing.Point(861, 463);
@@ -153,7 +134,7 @@ namespace ABC_Car_Traders.CustomerController
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(250, 300);
+            this.label5.Location = new System.Drawing.Point(39, 300);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 20);
             this.label5.TabIndex = 53;
@@ -161,17 +142,17 @@ namespace ABC_Car_Traders.CustomerController
             // 
             // txtCustomerId
             // 
-            this.txtCustomerId.Location = new System.Drawing.Point(359, 298);
+            this.txtCustomerId.Location = new System.Drawing.Point(158, 298);
             this.txtCustomerId.Name = "txtCustomerId";
             this.txtCustomerId.ReadOnly = true;
-            this.txtCustomerId.Size = new System.Drawing.Size(104, 22);
+            this.txtCustomerId.Size = new System.Drawing.Size(187, 22);
             this.txtCustomerId.TabIndex = 52;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(498, 300);
+            this.label6.Location = new System.Drawing.Point(383, 300);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 20);
             this.label6.TabIndex = 55;
@@ -179,10 +160,10 @@ namespace ABC_Car_Traders.CustomerController
             // 
             // txtCarId
             // 
-            this.txtCarId.Location = new System.Drawing.Point(564, 298);
+            this.txtCarId.Location = new System.Drawing.Point(458, 298);
             this.txtCarId.Name = "txtCarId";
             this.txtCarId.ReadOnly = true;
-            this.txtCarId.Size = new System.Drawing.Size(104, 22);
+            this.txtCarId.Size = new System.Drawing.Size(196, 22);
             this.txtCarId.TabIndex = 54;
             // 
             // txtCarQty
@@ -340,8 +321,6 @@ namespace ABC_Car_Traders.CustomerController
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtCustomerId);
             this.Controls.Add(this.btnCarOrder);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtOrderId);
             this.Controls.Add(this.dgvCarOrder);
             this.Controls.Add(this.dgvCar);
             this.Controls.Add(this.btnCarSearch);
@@ -368,8 +347,6 @@ namespace ABC_Car_Traders.CustomerController
         private System.Windows.Forms.TextBox txtCarSearchId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvCarOrder;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtOrderId;
         private System.Windows.Forms.Button btnCarOrder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCustomerId;

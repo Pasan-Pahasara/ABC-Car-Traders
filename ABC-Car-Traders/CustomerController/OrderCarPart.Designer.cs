@@ -48,8 +48,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtCustomerId = new System.Windows.Forms.TextBox();
             this.btnCarPartOrder = new System.Windows.Forms.Button();
-            this.txtOrderId = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.dgvCarPartOrder = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
@@ -204,7 +202,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(498, 300);
+            this.label6.Location = new System.Drawing.Point(403, 300);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 20);
             this.label6.TabIndex = 74;
@@ -212,17 +210,17 @@
             // 
             // txtCarPartId
             // 
-            this.txtCarPartId.Location = new System.Drawing.Point(598, 298);
+            this.txtCarPartId.Location = new System.Drawing.Point(508, 298);
             this.txtCarPartId.Name = "txtCarPartId";
             this.txtCarPartId.ReadOnly = true;
-            this.txtCarPartId.Size = new System.Drawing.Size(104, 22);
+            this.txtCarPartId.Size = new System.Drawing.Size(204, 22);
             this.txtCarPartId.TabIndex = 73;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(250, 300);
+            this.label5.Location = new System.Drawing.Point(39, 300);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 20);
             this.label5.TabIndex = 72;
@@ -230,10 +228,10 @@
             // 
             // txtCustomerId
             // 
-            this.txtCustomerId.Location = new System.Drawing.Point(359, 298);
+            this.txtCustomerId.Location = new System.Drawing.Point(163, 298);
             this.txtCustomerId.Name = "txtCustomerId";
             this.txtCustomerId.ReadOnly = true;
-            this.txtCustomerId.Size = new System.Drawing.Size(104, 22);
+            this.txtCustomerId.Size = new System.Drawing.Size(197, 22);
             this.txtCustomerId.TabIndex = 71;
             // 
             // btnCarPartOrder
@@ -245,23 +243,6 @@
             this.btnCarPartOrder.Text = "+ Order Car Part";
             this.btnCarPartOrder.UseVisualStyleBackColor = true;
             this.btnCarPartOrder.Click += new System.EventHandler(this.btnCarPartOrder_Click);
-            // 
-            // txtOrderId
-            // 
-            this.txtOrderId.Location = new System.Drawing.Point(121, 298);
-            this.txtOrderId.Name = "txtOrderId";
-            this.txtOrderId.Size = new System.Drawing.Size(104, 22);
-            this.txtOrderId.TabIndex = 68;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Variable Text Semibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(39, 300);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 20);
-            this.label4.TabIndex = 69;
-            this.label4.Text = "Order ID";
             // 
             // dgvCarPartOrder
             // 
@@ -338,8 +319,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtCustomerId);
             this.Controls.Add(this.btnCarPartOrder);
-            this.Controls.Add(this.txtOrderId);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvCarPartOrder);
             this.Controls.Add(this.dgvCarPart);
             this.Controls.Add(this.btnCarPartSearch);
@@ -380,8 +359,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCustomerId;
         private System.Windows.Forms.Button btnCarPartOrder;
-        private System.Windows.Forms.TextBox txtOrderId;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dgvCarPartOrder;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label14;
