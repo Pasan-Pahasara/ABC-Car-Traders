@@ -17,9 +17,12 @@ namespace ABC_Car_Traders.AdminController
 {
     public partial class ManageCustomer : UserControl
     {
+        private string idValue; 
+
         public ManageCustomer()
         {
             InitializeComponent();
+            idValue = "";
         }
 
         private void ManageCustomer_Load(object sender, EventArgs e)
@@ -28,13 +31,19 @@ namespace ABC_Car_Traders.AdminController
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    // Command Text with to select * data from the database table
-                    string sqlCommandText = "SELECT * FROM Customer";
+                    string passPhrase = "customerpass";
+
+                    // Updated SQL command to decrypt the password
+                    string sqlCommandText = "SELECT ID, Name, Address, Contact, NIC, Email, CONVERT(VARCHAR(255), DecryptByPassPhrase(@Passphrase, Password)) AS DecryptedPassword FROM Customer";
+
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
+                        sqlCommand.Parameters.Add(new SqlParameter("@Passphrase", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Passphrase"].Value = passPhrase;
+
                         try
                         {
-                            // Open database connection
+                           // Open database connection
                             dbConnection.Open();
                             // SQL adapter 
                             SqlDataAdapter sqlAdapter = new SqlDataAdapter(sqlCommand);
@@ -42,6 +51,10 @@ namespace ABC_Car_Traders.AdminController
                             DataTable customerTable = new DataTable();
                             // Fill the datatable by executing the command
                             sqlAdapter.Fill(customerTable);
+
+                            // Rename the decrypted password column
+                            customerTable.Columns["DecryptedPassword"].ColumnName = "Password";
+
                             // set the datagrid view's datasource 
                             dgvCustomer.DataSource = customerTable;
                         }
@@ -67,23 +80,27 @@ namespace ABC_Car_Traders.AdminController
             if (string.IsNullOrWhiteSpace(txtCustomerName.Text) ||
               string.IsNullOrWhiteSpace(txtCustomerAddress.Text) ||
               string.IsNullOrWhiteSpace(txtCustomerContact.Text) ||
-              string.IsNullOrWhiteSpace(txtCustomerNIC.Text))
+              string.IsNullOrWhiteSpace(txtCustomerNIC.Text) ||
+              string.IsNullOrWhiteSpace(txtCustomerEmail.Text) ||
+              string.IsNullOrWhiteSpace(txtCustomerPassword.Text))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string passPhrase = "customerpass";
+
             try
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
                     // Command Text with parameters                    
-                    string sqlCommandText = "UPDATE Customer SET Name = @Name, Address = @Address, Contact = @Contact, NIC = @NIC WHERE ID = @ID";
+                    string sqlCommandText = "UPDATE Customer SET Name = @Name, Address = @Address, Contact = @Contact, NIC = @NIC, Email = @Email, Password = EncryptByPassPhrase(@Passphrase, @Password)  WHERE ID = @ID";
                     // Set Parameters of the sql Command text
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         // Set Parameters of the sql Command text
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
+                        sqlCommand.Parameters["@ID"].Value = idValue;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar));
                         sqlCommand.Parameters["@Name"].Value = txtCustomerName.Text;
@@ -96,6 +113,15 @@ namespace ABC_Car_Traders.AdminController
 
                         sqlCommand.Parameters.Add(new SqlParameter("@NIC", SqlDbType.VarChar));
                         sqlCommand.Parameters["@NIC"].Value = txtCustomerNIC.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Email"].Value = txtCustomerEmail.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Password", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Password"].Value = txtCustomerPassword.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@passphrase", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@passphrase"].Value = passPhrase;
 
                         try
                         {
@@ -139,11 +165,13 @@ namespace ABC_Car_Traders.AdminController
                 DataGridViewRow row = dgvCustomer.Rows[e.RowIndex];
 
                 // Assign the cell values to the text fields
-                txtCustomerId.Text = row.Cells[0].Value.ToString();
+                idValue = row.Cells[0].Value.ToString();
                 txtCustomerName.Text = row.Cells[1].Value.ToString();
                 txtCustomerAddress.Text = row.Cells[2].Value.ToString();
                 txtCustomerContact.Text = row.Cells[3].Value.ToString();
                 txtCustomerNIC.Text = row.Cells[4].Value.ToString();
+                txtCustomerEmail.Text = row.Cells[5].Value.ToString();
+                txtCustomerPassword.Text = row.Cells[6].Value.ToString();
             }
         }
 
@@ -155,7 +183,7 @@ namespace ABC_Car_Traders.AdminController
                 using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                 {
                     sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
+                    sqlCommand.Parameters["@ID"].Value = idValue;
 
                     try
                     {
@@ -187,11 +215,14 @@ namespace ABC_Car_Traders.AdminController
 
         private void ClearCustomerFields()
         {
+            idValue = string.Empty;
             txtCustomerId.Text = string.Empty;
             txtCustomerName.Text = string.Empty;
             txtCustomerAddress.Text = string.Empty;
             txtCustomerContact.Text = string.Empty;
             txtCustomerNIC.Text = string.Empty;
+            txtCustomerEmail.Text = string.Empty;
+            txtCustomerPassword.Text = string.Empty;
         }
 
         private void btnCustomerAdd_Click(object sender, EventArgs e)
@@ -199,21 +230,26 @@ namespace ABC_Car_Traders.AdminController
             if (string.IsNullOrWhiteSpace(txtCustomerName.Text) ||
                 string.IsNullOrWhiteSpace(txtCustomerAddress.Text) ||
                 string.IsNullOrWhiteSpace(txtCustomerContact.Text) ||
-                string.IsNullOrWhiteSpace(txtCustomerNIC.Text))
+                string.IsNullOrWhiteSpace(txtCustomerNIC.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtCustomerPassword.Text))
             {
                 MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            string passPhrase = "customerpass";
+            string customerId = GenerateCustomerId();
+
             try
             {
                 using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
                 {
-                    string sqlCommandText = "INSERT INTO Customer (ID, Name, Address, Contact, NIC) VALUES (@ID, @Name, @Address, @Contact, @NIC)";
+                    string sqlCommandText = "INSERT INTO Customer (ID, Name, Address, Contact, NIC, Email, Password) VALUES (@ID, @Name, @Address, @Contact, @NIC, @Email, EncryptByPassPhrase(@passphrase, @Password))";
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtCustomerId.Text;
+                        sqlCommand.Parameters["@ID"].Value = customerId;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar));
                         sqlCommand.Parameters["@Name"].Value = txtCustomerName.Text;
@@ -226,6 +262,15 @@ namespace ABC_Car_Traders.AdminController
 
                         sqlCommand.Parameters.Add(new SqlParameter("@NIC", SqlDbType.VarChar));
                         sqlCommand.Parameters["@NIC"].Value = txtCustomerNIC.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Email"].Value = txtCustomerEmail.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@Password", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@Password"].Value = txtCustomerPassword.Text;
+
+                        sqlCommand.Parameters.Add(new SqlParameter("@passphrase", SqlDbType.VarChar));
+                        sqlCommand.Parameters["@passphrase"].Value = passPhrase;
 
                         try
                         {
@@ -283,6 +328,8 @@ namespace ABC_Car_Traders.AdminController
                                 txtCustomerAddress.Text = reader["Address"].ToString();
                                 txtCustomerContact.Text = reader["Contact"].ToString();
                                 txtCustomerNIC.Text = reader["NIC"].ToString();
+                                txtCustomerEmail.Text = reader["Email"].ToString();
+                                txtCustomerPassword.Text = reader["Password"].ToString();
                             }
                             else
                             {
@@ -381,6 +428,40 @@ namespace ABC_Car_Traders.AdminController
             }
 
             return columnName;
+        }
+
+        private string GenerateCustomerId()
+        {
+            string newId = "C001";
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    dbConnection.Open();
+
+                    // Get the last customer ID
+                    string sqlCommandText = "SELECT TOP 1 ID FROM Customer ORDER BY ID DESC";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        object result = sqlCommand.ExecuteScalar();
+                        if (result != null)
+                        {
+                            string lastId = result.ToString();
+                            int numericPart = int.Parse(lastId.Substring(1)) + 1;
+                            newId = "C" + numericPart.ToString("D3");
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return newId;
         }
     }
 }
