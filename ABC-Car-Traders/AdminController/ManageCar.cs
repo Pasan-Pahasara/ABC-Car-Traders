@@ -15,9 +15,11 @@ namespace ABC_Car_Traders.AdminController
 {
     public partial class ManageCar : UserControl
     {
+        private string idValue;
         public ManageCar()
         {
             InitializeComponent();
+            idValue = "";
         }
 
         private void ManageCar_Load(object sender, EventArgs e)
@@ -81,7 +83,7 @@ namespace ABC_Car_Traders.AdminController
                     {
                         // Set Parameters of the sql Command text
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
+                        sqlCommand.Parameters["@ID"].Value = idValue;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Model", SqlDbType.VarChar));
                         sqlCommand.Parameters["@Model"].Value = txtCarModel.Text;
@@ -140,7 +142,7 @@ namespace ABC_Car_Traders.AdminController
                 DataGridViewRow row = dgvCar.Rows[e.RowIndex];
 
                 // Assign the cell values to the text fields
-                txtCarId.Text = row.Cells[0].Value.ToString();
+                idValue = row.Cells[0].Value.ToString();
                 txtCarModel.Text = row.Cells[1].Value.ToString();
                 txtCarBrand.Text = row.Cells[2].Value.ToString();
                 txtCarFuelType.Text = row.Cells[3].Value.ToString();
@@ -151,6 +153,7 @@ namespace ABC_Car_Traders.AdminController
 
         private void ClearCarFields()
         {
+            idValue = string.Empty;
             txtCarId.Text = string.Empty;
             txtCarModel.Text = string.Empty;
             txtCarBrand.Text = string.Empty;
@@ -167,7 +170,7 @@ namespace ABC_Car_Traders.AdminController
                 using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                 {
                     sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
+                    sqlCommand.Parameters["@ID"].Value = idValue;
 
                     try
                     {
@@ -207,6 +210,7 @@ namespace ABC_Car_Traders.AdminController
                 MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string carId = GenerateCarId();
 
             try
             {
@@ -216,7 +220,7 @@ namespace ABC_Car_Traders.AdminController
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtCarId.Text;
+                        sqlCommand.Parameters["@ID"].Value = carId;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Model", SqlDbType.VarChar));
                         sqlCommand.Parameters["@Model"].Value = txtCarModel.Text;
@@ -303,6 +307,7 @@ namespace ABC_Car_Traders.AdminController
             catch (Exception ex)
             {
                 MessageBox.Show("Error searching car: " + ex.Message);
+                ClearCarFields();
             }
         }
 
@@ -388,6 +393,40 @@ namespace ABC_Car_Traders.AdminController
             }
 
             return columnName;
+        }
+
+        private string GenerateCarId()
+        {
+            string newId = "CR001";
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    dbConnection.Open();
+
+                    // Get the last customer ID
+                    string sqlCommandText = "SELECT TOP 1 ID FROM Car ORDER BY ID DESC";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        object result = sqlCommand.ExecuteScalar();
+                        if (result != null)
+                        {
+                            string lastId = result.ToString();
+                            int numericPart = int.Parse(lastId.Substring(2)) + 1;
+                            newId = "CR" + numericPart.ToString("D3");
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return newId;
         }
     }
 }

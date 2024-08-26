@@ -16,9 +16,12 @@ namespace ABC_Car_Traders.AdminController
 {
     public partial class ManageCarPartPart : UserControl
     {
+        private string idValue;
+
         public ManageCarPartPart()
         {
             InitializeComponent();
+            idValue = "";
         }
 
         private void ManageCarPart_Load(object sender, EventArgs e)
@@ -84,7 +87,7 @@ namespace ABC_Car_Traders.AdminController
                     {
                         // Set Parameters of the sql Command text
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtCarPartId.Text;
+                        sqlCommand.Parameters["@ID"].Value = idValue;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar));
                         sqlCommand.Parameters["@Name"].Value = txtCarPartName.Text;
@@ -143,7 +146,7 @@ namespace ABC_Car_Traders.AdminController
                 DataGridViewRow row = dgvCarPart.Rows[e.RowIndex];
 
                 // Assign the cell values to the text fields
-                txtCarPartId.Text = row.Cells[0].Value.ToString();
+                idValue = row.Cells[0].Value.ToString();
                 txtCarPartName.Text = row.Cells[1].Value.ToString();
                 txtCarPartDescription.Text = row.Cells[2].Value.ToString();
                 txtCarPartType.Text = row.Cells[3].Value.ToString();
@@ -170,7 +173,7 @@ namespace ABC_Car_Traders.AdminController
                 using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                 {
                     sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                    sqlCommand.Parameters["@ID"].Value = txtCarPartId.Text;
+                    sqlCommand.Parameters["@ID"].Value = idValue;
 
                     try
                     {
@@ -211,6 +214,7 @@ namespace ABC_Car_Traders.AdminController
                 MessageBox.Show("Please fill in all fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string carPartId = GenerateCarPartId();
 
             try
             {
@@ -220,7 +224,7 @@ namespace ABC_Car_Traders.AdminController
                     using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
                     {
                         sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.VarChar));
-                        sqlCommand.Parameters["@ID"].Value = txtCarPartId.Text;
+                        sqlCommand.Parameters["@ID"].Value = carPartId;
 
                         sqlCommand.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar));
                         sqlCommand.Parameters["@Name"].Value = txtCarPartName.Text;
@@ -307,6 +311,7 @@ namespace ABC_Car_Traders.AdminController
             catch (Exception ex)
             {
                 MessageBox.Show("Error searching car part: " + ex.Message);
+                ClearCarPartFields();
             }
         }
 
@@ -392,6 +397,40 @@ namespace ABC_Car_Traders.AdminController
             }
 
             return columnName;
+        }
+
+        private string GenerateCarPartId()
+        {
+            string newId = "CP001";
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    dbConnection.Open();
+
+                    // Get the last customer ID
+                    string sqlCommandText = "SELECT TOP 1 ID FROM CarPart ORDER BY ID DESC";
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        object result = sqlCommand.ExecuteScalar();
+                        if (result != null)
+                        {
+                            string lastId = result.ToString();
+                            int numericPart = int.Parse(lastId.Substring(2)) + 1;
+                            newId = "CP" + numericPart.ToString("D3");
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return newId;
         }
     }
 }
