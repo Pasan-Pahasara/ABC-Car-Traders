@@ -45,5 +45,13 @@ namespace ABC_Car_Traders
             ManageOrderDetails manageOrderDetails = new ManageOrderDetails();
             AddCustomerControl(manageOrderDetails);
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.FormClosed += (s, args) => this.Close();
+            login.Show();
+            this.Hide();
+        }
     }
 }

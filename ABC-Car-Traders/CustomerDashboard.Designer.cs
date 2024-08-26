@@ -31,11 +31,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLogOut = new System.Windows.Forms.PictureBox();
             this.btnManageOrderDetails = new System.Windows.Forms.Button();
             this.btnOrderCarPart = new System.Windows.Forms.Button();
             this.btnOrderCar = new System.Windows.Forms.Button();
             this.customerContainer = new System.Windows.Forms.Panel();
-            this.btnLogOut = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
             this.SuspendLayout();
@@ -73,6 +73,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(237, 762);
             this.panel1.TabIndex = 1;
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Image = global::ABC_Car_Traders.Properties.Resources.logout;
+            this.btnLogOut.Location = new System.Drawing.Point(96, 659);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(34, 37);
+            this.btnLogOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnLogOut.TabIndex = 7;
+            this.btnLogOut.TabStop = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnManageOrderDetails
             // 
@@ -112,16 +123,6 @@
             this.customerContainer.Padding = new System.Windows.Forms.Padding(0, 25, 25, 25);
             this.customerContainer.Size = new System.Drawing.Size(1041, 762);
             this.customerContainer.TabIndex = 2;
-            // 
-            // btnLogOut
-            // 
-            this.btnLogOut.Image = global::ABC_Car_Traders.Properties.Resources.logout;
-            this.btnLogOut.Location = new System.Drawing.Point(96, 659);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(34, 37);
-            this.btnLogOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnLogOut.TabIndex = 7;
-            this.btnLogOut.TabStop = false;
             // 
             // CustomerDashboard
             // 
