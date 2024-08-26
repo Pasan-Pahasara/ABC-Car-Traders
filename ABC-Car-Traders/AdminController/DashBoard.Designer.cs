@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
             this.lblTotalCustomers = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblTotalCars = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -43,11 +43,19 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblTotalCarPartOrders = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblDailyCarOrders = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.lblDailyCarPartOrders = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,16 +68,6 @@
             this.panel1.Size = new System.Drawing.Size(263, 156);
             this.panel1.TabIndex = 67;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(3, 13);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(245, 37);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Total Customers";
-            // 
             // lblTotalCustomers
             // 
             this.lblTotalCustomers.AutoSize = true;
@@ -80,6 +78,16 @@
             this.lblTotalCustomers.Size = new System.Drawing.Size(72, 80);
             this.lblTotalCustomers.TabIndex = 2;
             this.lblTotalCustomers.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold);
+            this.label13.Location = new System.Drawing.Point(3, 13);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(245, 37);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Total Customers";
             // 
             // lblTotalCars
             // 
@@ -205,11 +213,75 @@
             this.label9.TabIndex = 1;
             this.label9.Text = "Total Car Part Orders";
             // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel6.Controls.Add(this.lblDailyCarOrders);
+            this.panel6.Controls.Add(this.label1);
+            this.panel6.Location = new System.Drawing.Point(59, 463);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(422, 156);
+            this.panel6.TabIndex = 72;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(94, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(255, 37);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Daily Car Orders";
+            // 
+            // lblDailyCarOrders
+            // 
+            this.lblDailyCarOrders.AutoSize = true;
+            this.lblDailyCarOrders.Font = new System.Drawing.Font("Century Gothic", 40F, System.Drawing.FontStyle.Bold);
+            this.lblDailyCarOrders.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblDailyCarOrders.Location = new System.Drawing.Point(166, 64);
+            this.lblDailyCarOrders.Name = "lblDailyCarOrders";
+            this.lblDailyCarOrders.Size = new System.Drawing.Size(72, 80);
+            this.lblDailyCarOrders.TabIndex = 3;
+            this.lblDailyCarOrders.Text = "0";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel7.Controls.Add(this.lblDailyCarPartOrders);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Location = new System.Drawing.Point(537, 463);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(426, 156);
+            this.panel7.TabIndex = 73;
+            // 
+            // lblDailyCarPartOrders
+            // 
+            this.lblDailyCarPartOrders.AutoSize = true;
+            this.lblDailyCarPartOrders.Font = new System.Drawing.Font("Century Gothic", 40F, System.Drawing.FontStyle.Bold);
+            this.lblDailyCarPartOrders.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblDailyCarPartOrders.Location = new System.Drawing.Point(169, 64);
+            this.lblDailyCarPartOrders.Name = "lblDailyCarPartOrders";
+            this.lblDailyCarPartOrders.Size = new System.Drawing.Size(72, 80);
+            this.lblDailyCarPartOrders.TabIndex = 4;
+            this.lblDailyCarPartOrders.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(60, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(319, 37);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Daily Car Part Orders";
+            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -228,6 +300,10 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -249,5 +325,11 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblTotalCarPartOrders;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label lblDailyCarOrders;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label lblDailyCarPartOrders;
+        private System.Windows.Forms.Label label4;
     }
 }

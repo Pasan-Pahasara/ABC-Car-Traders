@@ -25,6 +25,8 @@ namespace ABC_Car_Traders.AdminController
             CountAllCarParts();
             CountAllCarOrders();
             CountAllCarPartOrders();
+            CountDailyCarOrders();
+            CountDailyCarPartOrders();
         }
 
         private void CountAllCars()
@@ -199,6 +201,82 @@ namespace ABC_Car_Traders.AdminController
 
                             // Show the total number of car part orders
                             lblTotalCarPartOrders.Text = totalCarPartOrders.ToString();
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            dbConnection.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CountDailyCarOrders()
+        {
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    // SQL query to count daily orders
+                    string sqlCommandText = "SELECT COUNT(*) AS DailyOrders FROM CarOrder WHERE OrderDate >= CAST(GETDATE() AS DATE) AND OrderDate < DATEADD(DAY, 1, CAST(GETDATE() AS DATE))";
+
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+                            // Execute the query and get the count
+                            int dailyCarOrders = (int)sqlCommand.ExecuteScalar();
+
+                            // Show the daily number of orders
+                            lblDailyCarOrders.Text = dailyCarOrders.ToString();
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            MessageBox.Show(sqlEx.Message);
+                        }
+                        finally
+                        {
+                            dbConnection.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CountDailyCarPartOrders()
+        {
+            try
+            {
+                using (SqlConnection dbConnection = new SqlConnection(Properties.Settings.Default.ABC_Car_TradersConnectionString))
+                {
+                    // SQL query to count weekly orders
+                    string sqlCommandText = "SELECT COUNT(*) AS DailyOrders FROM CarPartOrder WHERE OrderDate >= CAST(GETDATE() AS DATE) AND OrderDate < DATEADD(DAY, 1, CAST(GETDATE() AS DATE))";
+
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlCommandText, dbConnection))
+                    {
+                        try
+                        {
+                            // Open database connection
+                            dbConnection.Open();
+                            // Execute the query and get the count
+                            int dailyCarPartOrders = (int)sqlCommand.ExecuteScalar();
+
+                            // Show the weekly number of orders
+                            lblDailyCarPartOrders.Text = dailyCarPartOrders.ToString();
                         }
                         catch (SqlException sqlEx)
                         {
