@@ -65,5 +65,11 @@ namespace ABC_Car_Traders
             login.Show();
             this.Hide();
         }
+
+        private void btnGenerateReports_Click(object sender, EventArgs e)
+        {
+            GenerateReports generateReports = new GenerateReports();
+            AddAdminControl(generateReports);
+        }
     }
 }

@@ -138,6 +138,12 @@
     <Compile Include="AdminController\DashBoard.Designer.cs">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminController\GenerateReports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminController\GenerateReports.Designer.cs">
+      <DependentUpon>GenerateReports.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminController\ManageCarPart.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AdminController\DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminController\GenerateReports.resx">
+      <DependentUpon>GenerateReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminController\ManageCarPart.resx">
       <DependentUpon>ManageCarPart.cs</DependentUpon>

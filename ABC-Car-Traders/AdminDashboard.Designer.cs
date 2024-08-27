@@ -38,12 +38,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.adminContainer = new System.Windows.Forms.Panel();
+            this.btnGenerateReports = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnGenerateReports);
             this.panel1.Controls.Add(this.btnManageCustomer);
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnManageOrderDetails);
@@ -148,6 +150,16 @@
             this.adminContainer.Size = new System.Drawing.Size(1041, 762);
             this.adminContainer.TabIndex = 1;
             // 
+            // btnGenerateReports
+            // 
+            this.btnGenerateReports.Location = new System.Drawing.Point(26, 460);
+            this.btnGenerateReports.Name = "btnGenerateReports";
+            this.btnGenerateReports.Size = new System.Drawing.Size(184, 48);
+            this.btnGenerateReports.TabIndex = 8;
+            this.btnGenerateReports.Text = "Generate Reports";
+            this.btnGenerateReports.UseVisualStyleBackColor = true;
+            this.btnGenerateReports.Click += new System.EventHandler(this.btnGenerateReports_Click);
+            // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -178,6 +190,7 @@
         private System.Windows.Forms.Button btnManageOrderDetails;
         private System.Windows.Forms.PictureBox btnLogOut;
         private System.Windows.Forms.Button btnManageCustomer;
+        private System.Windows.Forms.Button btnGenerateReports;
     }
 }
 
